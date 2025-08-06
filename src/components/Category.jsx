@@ -9,10 +9,17 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
+import TitleBox from './TitleBox'
+import IntroSection from './IntroSection'
 
 const Category = () => {
   return (
-    <Swiper 
+    <div>
+       <TitleBox 
+        title={'---From 11:00am to 10:00pm---'}
+         heading={'order online'}
+         ></TitleBox>
+        <Swiper 
     slidesPerView={4}
         spaceBetween={10}
         pagination={{
@@ -41,6 +48,10 @@ const Category = () => {
         <Slide img={img5} ></Slide>
       </SwiperSlide>
     </Swiper>
+    <div className="py-8">
+        <IntroSection></IntroSection>
+      </div>
+    </div>
   )
 }
 
