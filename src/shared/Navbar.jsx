@@ -45,7 +45,7 @@ const Navbar = () => {
       </ul>
     </div>
    <div className="dropdown dropdown-end">
-     <div className="mx-2 text-xl btn btn-ghost btn-circle lg:hidden md:hidden" role="button" tabIndex={0}>
+     <div className="mx-2 text-xl text-white font-bold btn btn-ghost btn-circle lg:hidden md:hidden" role="button" tabIndex={0}>
         < AiOutlineMenuFold/>
         </div>
         <div className="menu bg-gray-600 menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow" tabIndex={0}>
