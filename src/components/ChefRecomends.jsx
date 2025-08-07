@@ -13,7 +13,7 @@ const ChefRecomends = () => {
         })
     },[])
   return (
-    <div>
+    <div className="py-8">
         <TitleBox title={'---Should Try---'} heading={'CHEF RECOMMENDS'}></TitleBox>
         <div className="grid lg:grid-cols-3 md:grid-cols-3 grid-cols-1 gap-4 ">
             {
