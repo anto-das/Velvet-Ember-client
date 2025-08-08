@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import TitleBox from "./TitleBox"
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
+import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Rating } from '@smastrom/react-rating'
 
@@ -22,7 +22,14 @@ const Testimonials= () =>{
             heading={'TESTIMONIALS'}
             ></TitleBox>
           <div>
-                <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+                <Swiper
+                 modules={[Navigation,Autoplay]}
+                 navigation={true}
+                 autoplay={{
+                    delay:3000,
+                    disableOnInteraction:false
+                 }}
+                  className="mySwiper">
        
             {
                 reviews.map(review =><SwiperSlide

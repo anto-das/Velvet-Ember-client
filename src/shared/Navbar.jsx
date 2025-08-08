@@ -12,10 +12,10 @@ const Navbar = () => {
     </ul>
   </>
   return (
-   <div className="navbar flex justify-between items-center bg-gray-600 shadow-sm">
+   <div className="navbar flex justify-between items-center bg-black/20 shadow-sm">
   <div className="inline">
    <Link to={'/'}>
-    <p className="capitalize btn bg-gray-600 shadow-none border-none text-lg font-bold text-white">velvet <span className='text-amber-500'> ember</span> 
+    <p className="capitalize shadow-none border-none text-lg font-bold text-white">velvet <span className='text-amber-500'> ember</span> 
     </p>
    </Link>
   </div>

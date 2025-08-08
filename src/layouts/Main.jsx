@@ -6,7 +6,7 @@ import { Footer } from "../shared/Footer"
 const Main = () => {
   return (
     <div className="relative">
-        <header className="sticky top-0 z-10">
+        <header className="fixed w-full z-10">
           <Navbar></Navbar>
         </header>
         <main>
