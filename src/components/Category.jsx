@@ -11,7 +11,7 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import TitleBox from './TitleBox'
 import IntroSection from './IntroSection'
-
+import bgImg from '../assets/home/chef-service.jpg'
 const Category = () => {
   return (
     <div>
@@ -49,7 +49,11 @@ const Category = () => {
       </SwiperSlide>
     </Swiper>
     <div className="py-8">
-        <IntroSection></IntroSection>
+        <IntroSection
+        bgImg={bgImg}
+        heading={'velvet ember'}
+        description={'Velvet Ember is a refined digital experience blending elegance and innovation. Crafted for modern users,'}
+        ></IntroSection>
       </div>
     </div>
   )

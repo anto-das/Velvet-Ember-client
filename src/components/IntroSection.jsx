@@ -1,15 +1,20 @@
-import heroImg from '../assets/home/chef-service.jpg'
+import { Parallax } from 'react-parallax';
 
-const IntroSection = () => {
+const IntroSection = ({bgImg,heading,description}) => {
   return (
-    <div className='bg-cover bg-center py-17'
-     style={{ backgroundImage: `url(${heroImg})` }}
+      <Parallax
+        blur={{ min: -40, max: 40 }}
+        bgImage={bgImg}
+        bgImageAlt="the dog"
+        strength={-200}
     >
-        <div className='max-w-4xl mx-auto bg-base-100 py-8 px-5'>
-            <h1 className='uppercase text-center text-2xl text-[#151515] font-semibold'>velvet ember</h1>
-            <p className='text-center'>Velvet Ember is a refined digital experience blending elegance and innovation. Crafted for modern users,</p>
+       <div className='bg-cover bg-center py-14 md:py-20 px-4 lg:py-40'>
+        <div className='max-w-4xl mx-auto bg-black/40 py-14 px-5'>
+            <h1 className='uppercase text-center text-2xl text-white font-semibold'> {heading} </h1>
+            <p className='text-center text-white'> {description} </p>
         </div>
     </div>
+    </Parallax>
   )
 }
 

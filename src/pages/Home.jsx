@@ -14,7 +14,7 @@ const Home = () => {
         <meta name="description" content="Welcome to Velvet Ember Home Page" />
       </Helmet>
       <Banner></Banner>
-      <div className="w-11/14 mx-auto my-5">
+      <div className="w-11/14 mx-auto my-10">
       <Category></Category>
       <PopularMenu></PopularMenu>
       <ChefRecomends></ChefRecomends>
