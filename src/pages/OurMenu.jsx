@@ -1,5 +1,6 @@
 import IntroSection from "../components/IntroSection"
 import bgImg from '../assets/menu/banner3.jpg'
+import bgImg2 from '../assets/home/chef-service.jpg'
 import PopularMenu from "../components/PopularMenu"
 import { Helmet } from "@dr.pogodin/react-helmet"
 const OurMenu = () => {
@@ -18,33 +19,33 @@ const OurMenu = () => {
          <PopularMenu></PopularMenu>
        </div>
         <IntroSection
-        bgImg={bgImg}
-        heading={'OUR MENU'}
-        description={'Would you like to try a dish?'}
+        bgImg={bgImg2}
+        heading={'dessert'}
+        description={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
         ></IntroSection>
        <div className="w-11/14 mx-auto my-10">
          <PopularMenu></PopularMenu>
        </div>
         <IntroSection
-        bgImg={bgImg}
-        heading={'OUR MENU'}
-        description={'Would you like to try a dish?'}
+        bgImg={bgImg2}
+        heading={'pizza'}
+        description={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
         ></IntroSection>
        <div className="w-11/14 mx-auto my-10">
          <PopularMenu></PopularMenu>
        </div>
         <IntroSection
-        bgImg={bgImg}
-        heading={'OUR MENU'}
-        description={'Would you like to try a dish?'}
+        bgImg={bgImg2}
+        heading={'salads'}
+        description={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
         ></IntroSection>
        <div className="w-11/14 mx-auto my-10">
          <PopularMenu></PopularMenu>
        </div>
         <IntroSection
-        bgImg={bgImg}
-        heading={'OUR MENU'}
-        description={'Would you like to try a dish?'}
+        bgImg={bgImg2}
+        heading={'soups'}
+        description={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
         ></IntroSection>
        <div className="w-11/14 mx-auto my-10">
          <PopularMenu></PopularMenu>
