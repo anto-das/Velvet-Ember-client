@@ -6,6 +6,7 @@ import {
 import Main from '../layouts/Main';
 import Home from '../pages/Home';
 import OurMenu from '../pages/OurMenu';
+import OurShop from '../pages/OurShop';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/our-shop',
-        element:<div>this is our shop</div>
+        element:<OurShop></OurShop>
       }
     ]
   },

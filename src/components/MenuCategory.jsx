@@ -1,6 +1,7 @@
 import React from 'react';
 import MenuItem from '../shared/MenuItem';
 import IntroSection from './IntroSection';
+import { Link } from 'react-router-dom';
 
 const MenuCategory = ({items,btnName}) => {
     return (
@@ -10,7 +11,9 @@ const MenuCategory = ({items,btnName}) => {
             items.map(item => <MenuItem key={item._id} item={item}></MenuItem>)
           }
         </div>
+        <Link to={'/our-shop'}>
         <button className='btn btn-outline border-0 uppercase border-b-4 '> {btnName} </button>
+        </Link>
         </div>
       
     );
