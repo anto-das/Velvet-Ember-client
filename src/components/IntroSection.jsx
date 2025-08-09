@@ -1,6 +1,6 @@
 import { Parallax } from 'react-parallax';
 
-const IntroSection = ({bgImg,heading,description}) => {
+const IntroSection = ({bgImg,title,description}) => {
   return (
       <Parallax
         blur={{ min: -40, max: 40 }}
@@ -11,7 +11,7 @@ const IntroSection = ({bgImg,heading,description}) => {
     >
        <div className=' py-14 md:py-20 px-4 lg:py-40'>
         <div className='max-w-4xl mx-auto bg-black/40 py-14 px-5'>
-            <h1 className='uppercase text-center text-2xl text-white font-semibold'> {heading} </h1>
+            <h1 className='uppercase text-center text-2xl text-white font-semibold'> {title} </h1>
             <p className='text-center text-white'> {description} </p>
         </div>
     </div>

@@ -51,7 +51,7 @@ const Category = () => {
     <div className="py-8">
         <IntroSection
         bgImg={bgImg}
-        heading={'velvet ember'}
+        title={'velvet ember'}
         description={'Velvet Ember is a refined digital experience blending elegance and innovation. Crafted for modern users,'}
         ></IntroSection>
       </div>
