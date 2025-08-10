@@ -3,18 +3,22 @@ import useMenu from "../hooks/useMenu";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import MenuTab from "./MenuTab";
+import { useParams } from "react-router-dom";
 
 const TabCategories = () => {
       const [items] = useMenu();
-      const [tabIdx,setTabIdx] =useState(0);
-      const desserts = items.filter(item => item.category === 'dessert');
+      const categories = ['salad','pizza','soup','desserts','drinks'];
+      const {category} =useParams();
+      const initialIndex = categories.indexOf(category);
+      const [tabindex,setTabIndex] =useState(initialIndex);
+      const salad = items.filter(item => item.category === 'salad');
       const pizza = items.filter(item => item.category === 'pizza');
       const soup = items.filter(item => item.category === 'soup');
-      const salad = items.filter(item => item.category === 'salad');
+      const desserts = items.filter(item => item.category === 'dessert');
       const drinks = items.filter(item => item.category === 'drinks');
       return (
         <div className="w-11/14 mx-auto my-8">
-            <Tabs defaultIndex={tabIdx} onSelect={(index) => setTabIdx(index)}>
+            <Tabs defaultIndex={tabindex} onSelect={(index) => setTabIndex(index)}>
                  <div className="flex justify-center items-center">
                     <TabList>
                     <Tab><span className="uppercase">salad</span></Tab>

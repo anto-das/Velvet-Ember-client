@@ -7,8 +7,8 @@ const Navbar = () => {
       <li  className="text-md font-bold text-white uppercase" ><NavLink to={'/'}>home</NavLink></li>
      <li> <NavLink  to={'/contact-us'} className="text-md font-bold text-white  uppercase">contact us</NavLink></li>
       <li ><NavLink to={'/dashboard'} className="text-md font-bold text-white  uppercase">dashboard</NavLink></li>
-     <li > <NavLink to={'our-menu'} className="text-md font-bold text-white  uppercase">our menu</NavLink></li>
-     <li > <NavLink to={'our-shop'} className="text-md font-bold text-white  uppercase">our shop</NavLink></li>
+     <li > <NavLink to={'/our-menu'} className="text-md font-bold text-white  uppercase">our menu</NavLink></li>
+     <li > <NavLink to={'/our-shop/salad'} className="text-md font-bold text-white  uppercase">our shop</NavLink></li>
     </ul>
   </>
   return (

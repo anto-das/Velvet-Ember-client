@@ -34,6 +34,7 @@ const OurMenu = () => {
          {/* offered section */}
          <MenuCategory
          items={offered}
+         title={"offered"}
          btnName={'ORDER YOUR FAVOURITE FOOD'}
          ></MenuCategory>
          {/* dessert section */}
@@ -45,6 +46,7 @@ const OurMenu = () => {
          </IntroSection>
          <MenuCategory
          items={desserts}
+         title={"desserts"}
          btnName={"ORDER YOUR FAVOURITE FOOD"}
          ></MenuCategory>
          {/* pizza section */}
@@ -56,6 +58,7 @@ const OurMenu = () => {
          </IntroSection>
          <MenuCategory
          items={pizza}
+         title={"pizza"}
          btnName={"ORDER YOUR FAVOURITE FOOD"}
          ></MenuCategory>
          {/* soup section */}
@@ -67,6 +70,7 @@ const OurMenu = () => {
          </IntroSection>
          <MenuCategory
          items={salad}
+         title={"salad"}
          btnName={"ORDER YOUR FAVOURITE FOOD"}
          ></MenuCategory>
          {/* soup section */}
@@ -78,6 +82,7 @@ const OurMenu = () => {
          </IntroSection>
          <MenuCategory
          items={soup}
+         title={"soup"}
          btnName={"ORDER YOUR FAVOURITE FOOD"}
          ></MenuCategory>
     </div>
