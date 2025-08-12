@@ -7,6 +7,7 @@ import Main from '../layouts/Main';
 import Home from '../pages/Home';
 import OurMenu from '../pages/OurMenu';
 import OurShop from '../pages/OurShop';
+import SignIn from '../pages/SignIn';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path:'/our-shop/:category',
         element:<OurShop></OurShop>
+      },
+      {
+        path:'/sign-in',
+        element:<SignIn></SignIn>
       }
     ]
   },
