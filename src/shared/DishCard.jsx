@@ -1,4 +1,3 @@
-import React from 'react'
 
 const DishCard = ({item}) => {
     const{name,recipe,image}=item;
