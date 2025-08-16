@@ -2,9 +2,12 @@
 import signInImg from '../assets/others/authentication2.png'
 import bgImg from '../assets/others/authentication.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
+import { AuthContext } from '../providers/AuthContext';
+import { Link } from 'react-router-dom';
 const SignIn = () => {
+  const {signIn} =useContext(AuthContext);
   const [disabled,setDisabled] = useState(true)
   const captchaRef = useRef();
   useEffect(()=>{
@@ -15,7 +18,9 @@ const SignIn = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email , password)
+    signIn(email,password)
+    .then(data => console.log(data?.user))
+    .catch(err => console.log(err))
   }
   const handleCaptcha = () =>{
     const value = captchaRef.current.value;
@@ -49,10 +54,14 @@ const SignIn = () => {
           <div className="form-control">
             <input disabled={disabled} className="btn w-full bg-[#d1a054] text-white mt-4" type="submit"  value={'Sign In'} />
           </div>
-          <p className='w-full text-center text-[20px] capitalize text-[#cc7d05] hover:link'>new here?<span className='font-bold'> create a new account</span></p>
+        
+            <p className='w-full text-center text-[20px] capitalize text-[#cc7d05]'>new here?   <Link to={'/sign-up'}>
+            <span className='font-bold hover:link'> create a new account</span>
+            </Link> </p>
+          
         </form>
           <p className='text-center text-lg text-gray-700 font-bold'>Or sign in with</p>
-          <div className='flex justify-center gap-10'>
+          <div className='flex justify-center gap-8 md:gap-10 lg:gap-10'>
             <div className='border-2 border-[#444444] text-xl btn btn-circle'>
             <FaFacebookF  />
           </div>

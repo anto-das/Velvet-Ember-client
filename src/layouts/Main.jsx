@@ -5,7 +5,7 @@ import { Footer } from "../shared/Footer"
 
 const Main = () => {
   const location = useLocation();
-  const onHeaderFooter = location.pathname.includes('/sign-in');
+  const onHeaderFooter = location.pathname.includes('/sign-in') || location.pathname.includes('/sign-up');
   return (
     <div className="relative">
         <header className="fixed w-full z-10">
