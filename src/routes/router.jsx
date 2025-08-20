@@ -9,6 +9,7 @@ import OurMenu from '../pages/OurMenu';
 import OurShop from '../pages/OurShop';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import PrivateRoute from './PrivateRoute';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/our-shop/:category',
-        element:<OurShop></OurShop>
+        element:<PrivateRoute><OurShop></OurShop></PrivateRoute>
       },
       {
         path:'/sign-up',

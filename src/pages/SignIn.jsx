@@ -2,14 +2,16 @@
 import signInImg from '../assets/others/authentication2.png'
 import bgImg from '../assets/others/authentication.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../providers/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 const SignIn = () => {
   const {signIn} =useContext(AuthContext);
-  const [disabled,setDisabled] = useState(true)
-  const captchaRef = useRef();
+  const [disabled,setDisabled] = useState(true);
+  const location = useLocation();
+  const navigate = useNavigate();
   useEffect(()=>{
     loadCaptchaEnginge(6);
   },[])
@@ -19,11 +21,14 @@ const SignIn = () => {
     const email = form.email.value;
     const password = form.password.value;
     signIn(email,password)
-    .then(data => console.log(data?.user))
+    .then(()=>{
+    toast.success('sign in successfully')
+    navigate( location.state || '/')
+    })
     .catch(err => console.log(err))
   }
-  const handleCaptcha = () =>{
-    const value = captchaRef.current.value;
+  const handleCaptcha = e =>{
+    const value = e.target.value;
     if(validateCaptcha(value)){
       setDisabled(false)
     }
@@ -48,8 +53,7 @@ const SignIn = () => {
           </div>
           <div>
             <LoadCanvasTemplate />
-             <input type="text" ref={captchaRef} name='captcha' className="input w-full" placeholder="Type the catcha above" />
-             <button onClick={handleCaptcha} className='btn hover:bg-[#d1a054] border-[#d1a054] hover:text-white btn-outline btn-xs mt-2 w-full'>Validate</button>
+             <input type="text" onBlur={handleCaptcha} name='captcha' className="input w-full" placeholder="Type the catcha above" />
           </div>
           <div className="form-control">
             <input disabled={disabled} className="btn w-full bg-[#d1a054] text-white mt-4" type="submit"  value={'Sign In'} />

@@ -3,34 +3,28 @@ import { AuthContext } from '../providers/AuthContext';
 import signInImg from '../assets/others/authentication2.png'
 import bgImg from '../assets/others/authentication.png'
 import { FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 const SignUp = () => {
+  const {signUp,updateUser} = useContext(AuthContext);
+  const navigate = useNavigate();
    const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm()
 
   const onSubmit = data =>{
-    console.log(data)
+    const {name,email,password} = data;
+    signUp(email,password)
+    .then(() =>{
+      updateUser({displayName:name})
+      toast.success('sign up successfully')
+      navigate('/')
+    })
+    .catch(err => console.log(err))
   }
-
-  //   const {signUp,updateUser} =useContext(AuthContext);
-  //    const handleSubmit = e =>{
-  //   e.preventDefault()
-  //   const form = e.target;
-  //   const name = form.name.value;
-  //   console.log(name)
-  //   const email = form.email.value;
-  //   const password = form.password.value;
-  //   signUp(email,password)
-  //   .then(()=>{
-  //     updateUser({displayName:name})
-  //   })
-  //   .catch(err => console.log(err))
-  // }
     return (
      <div style={{backgroundImage:`url(${bgImg})`}} className="hero min-h-screen bg-cover bg-center inset-0">
        <div className="hero-content flex-col w-11/14 mx-auto lg:flex-row-reverse md:flex-row-reverse  shadow-2xl md:px-14 lg:px-16 py-20 ">
@@ -56,8 +50,17 @@ const SignUp = () => {
                {/* password field */}
                <div>
                  <label className="label">Password</label>
-               <input type="password" {...register("password",{ required: true })} name='password' className="input w-full" placeholder="Password" />
-                {errors.password && <span className='text-red-500'>Password is required</span>}
+               <input type="password" {...register("password",
+                { required: true,
+                  minLength:6,
+                  maxLength:20,
+                  pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/
+                },
+                )} name='password' className="input w-full" placeholder="Password" />
+                {errors.password?.type ==='required' && <span className='text-red-500'>Password is required</span>}
+                {errors.password?.type==='minLength' && <span className='text-red-500'>Password must be 6 characters</span>}
+                {errors.password?.type==='maxLength' && <span className='text-red-500'>Password less then 20 characters</span>}
+                {errors.password?.type==='pattern' && <span className='text-red-500'>Password must have one uppercase letter one lowercase letter one number and one special characters </span>}
                </div>
                <div className="form-control">
             <input className="btn w-full bg-[#d1a054] text-white mt-4" type="submit"  value={'Sign In'} />
