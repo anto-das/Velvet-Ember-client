@@ -3,11 +3,12 @@ import { AuthContext } from '../providers/AuthContext';
 import signInImg from '../assets/others/authentication2.png'
 import bgImg from '../assets/others/authentication.png'
 import { FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 const SignUp = () => {
   const {signUp,updateUser} = useContext(AuthContext);
+  const location = useLocation();
   const navigate = useNavigate();
    const {
     register,
@@ -16,14 +17,15 @@ const SignUp = () => {
   } = useForm()
 
   const onSubmit = data =>{
-    const {name,email,password} = data;
+    const {name,email,password,photo} = data;
+    console.log(data)
     signUp(email,password)
     .then(() =>{
-      updateUser({displayName:name})
+      updateUser({displayName:name,photoURL:photo})
       toast.success('sign up successfully')
-      navigate('/')
+      navigate( location.state ||'/')
     })
-    .catch(err => console.log(err))
+    .catch(err => toast.error(err.message))
   }
     return (
      <div style={{backgroundImage:`url(${bgImg})`}} className="hero min-h-screen bg-cover bg-center inset-0">
@@ -40,6 +42,12 @@ const SignUp = () => {
                     <label className="label">Name</label>
                     <input type="text" {...register("name",{ required: true })} name='name' className="input w-full" placeholder="Name" />
                      {errors.name && <span className='text-red-500 '>Name is required</span>}
+               </div>
+                {/* photo field */}
+                 <div>
+                    <label className="label">Photo URL</label>
+                    <input type="text" {...register("photo",{ required: true })} name='photo' className="input w-full" placeholder="Photo URL" />
+                     {errors.photo && <span className='text-red-500 '>Photo url is required</span>}
                </div>
                 {/* email field */}
                <div>

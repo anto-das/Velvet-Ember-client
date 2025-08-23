@@ -6,14 +6,13 @@ import { AuthContext } from "../providers/AuthContext";
 import { FaUserCircle } from "react-icons/fa";
 import toast from "react-hot-toast";
 const Navbar = () => {
-  const {logout} = useContext(AuthContext);
+  const {logout,user} = useContext(AuthContext);
   const handleSignOut = () =>{
     logout()
     .then(() =>{
       toast.success('Sign Out Sucessfull')
     })
   }
-  const {user} = useContext(AuthContext);
   const navOptions = <>
      <ul className="menu items-center menu-vertical lg:menu-horizontal md:menu-horizontal px-1 w-full">
       <li  className="text-md font-bold text-white uppercase" ><NavLink to={'/'}>home</NavLink></li>
@@ -21,8 +20,9 @@ const Navbar = () => {
       <li ><NavLink to={'/dashboard'} className="text-md font-bold text-white  uppercase">dashboard</NavLink></li>
      <li > <NavLink to={'/our-menu'} className="text-md font-bold text-white  uppercase">our menu</NavLink></li>
      <li > <NavLink to={'/our-shop/salad'} className="text-md font-bold text-white  uppercase">our shop</NavLink></li>
+     {/* user profile */}
     {
-      user? <> <button onClick={handleSignOut} className="flex justify-center items-center gap-2"><li className="text-md font-bold text-white  uppercase">sign out</li> <FaUserCircle className="text-3xl text-white"/></button> </> :<> <li > <NavLink to={'sign-in'} className="text-md font-bold text-white  uppercase">sign in</NavLink></li></>
+      user? <></> :<> <li > <NavLink to={'sign-in'} className="text-md font-bold text-white  uppercase">sign in</NavLink></li></>
     }
     </ul>
   </>
@@ -34,7 +34,7 @@ const Navbar = () => {
     </p>
    </Link>
   </div>
-  <div className="flex gap-2">
+  <div className="flex items-center">
         <div className="hidden lg:block md:block">
           {navOptions}
         </div>
@@ -46,6 +46,24 @@ const Navbar = () => {
           {navOptions}
         </div>
    </div>
+   {/* user profile */}
+  {
+    user && <div className="dropdown dropdown-end">
+      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+        <div className="w-20 rounded-full">
+          <img
+            alt={user.displayName}
+            src={user.photoURL} 
+            className="w-full" />
+        </div>
+      </div>
+      <ul
+        tabIndex={0}
+        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        <li onClick={handleSignOut}><a>Logout</a></li>
+      </ul>
+    </div>
+  }
   </div>
 </div>
   )

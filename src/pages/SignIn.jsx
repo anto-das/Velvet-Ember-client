@@ -3,13 +3,14 @@ import signInImg from '../assets/others/authentication2.png'
 import bgImg from '../assets/others/authentication.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { useContext, useEffect, useState } from 'react';
-import { FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../providers/AuthContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 const SignIn = () => {
   const {signIn} =useContext(AuthContext);
   const [disabled,setDisabled] = useState(true);
+  const [isShowPassword,setIsShowPassword] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(()=>{
@@ -25,7 +26,7 @@ const SignIn = () => {
     toast.success('sign in successfully')
     navigate( location.state || '/')
     })
-    .catch(err => console.log(err))
+    .catch(err => toast.error(err.message))
   }
   const handleCaptcha = e =>{
     const value = e.target.value;
@@ -47,9 +48,12 @@ const SignIn = () => {
                <label className="label">Email</label>
                <input type="email" name='email' className="input w-full" placeholder="Email" />
           </div>
-          <div>
+          <div className='relative'>
             <label className="label">Password</label>
-          <input type="password" name='password' className="input w-full" placeholder="Password" />
+         <div> <input type={isShowPassword ? "text" :"password"} name='password' className="input w-full " placeholder="Password" /></div>
+          {
+            isShowPassword ? <span onClick={() =>setIsShowPassword(!isShowPassword)} className='text-center z-1 text-lg absolute top-8 right-5'><FaEye /></span> : <span onClick={() =>setIsShowPassword(!isShowPassword)} className='text-center text-lg absolute z-1 top-8 right-5 '><FaEyeSlash /></span>
+          }
           </div>
           <div>
             <LoadCanvasTemplate />
