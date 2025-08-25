@@ -1,7 +1,7 @@
 
 import signInImg from '../assets/others/authentication2.png'
 import bgImg from '../assets/others/authentication.png'
-import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { useContext, useEffect, useState } from 'react';
 import { FaEye, FaEyeSlash, FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../providers/AuthContext';
@@ -10,7 +10,7 @@ import toast from 'react-hot-toast';
 const SignIn = () => {
   const {signIn} =useContext(AuthContext);
   const [disabled,setDisabled] = useState(true);
-  const [isShowPassword,setIsShowPassword] = useState(true);
+  const [isShowPassword,setIsShowPassword] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(()=>{
