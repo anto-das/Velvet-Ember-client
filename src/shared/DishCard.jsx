@@ -2,20 +2,30 @@ import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import useCart from "../hooks/useCart";
 
 
 const DishCard = ({item}) => {
-    const{name,recipe,image}=item;
+    const{name,recipe,image,_id,price}=item;
     const {user} = useAuth();
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
+    const [,refetch] =useCart();
     // send the cart item in DB
-    const handleAddToCart = (cart) =>{
+    const handleAddToCart = () =>{
+      const cartDoc ={
+        menuId:_id,
+        email:user.email,
+        name,
+        image,
+        price
+      }
      if(user && user.email){
-      axiosSecure.post('http://localhost:4000/carts',cart)
+      axiosSecure.post('http://localhost:4000/carts',cartDoc)
       .then(res =>{
         if(res.data.acknowledged){
           toast.success(`${name} added to your cart`)
+          refetch();
         }
       })
       .catch(err =>toast.error(err.message))
@@ -51,7 +61,7 @@ const DishCard = ({item}) => {
     <h2 className="card-title">{name}</h2>
     <p className='text-gray-500'>{recipe}</p>
     <div className="card-actions">
-      <button onClick={() =>handleAddToCart(item)} className="btn text-[#BB8506] hover:text-[#ebb537] hover:border-none bg-[#E8E8E8] border border-b-[#BB8506] hover:bg-[#1F2937]">Add to cart</button>
+      <button onClick={handleAddToCart} className="btn text-[#BB8506] hover:text-[#ebb537] hover:border-none bg-[#E8E8E8] border border-b-[#BB8506] hover:bg-[#1F2937]">Add to cart</button>
     </div>
   </div>
 </div>
