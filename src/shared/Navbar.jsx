@@ -22,7 +22,7 @@ const Navbar = () => {
       <li ><NavLink to={'/dashboard'} className="text-md font-bold text-white  uppercase">dashboard</NavLink></li>
      <li > <NavLink to={'/our-menu'} className="text-md font-bold text-white  uppercase">our menu</NavLink></li>
      <li > <NavLink to={'/our-shop/salad'} className="text-md font-bold text-white  uppercase">our shop</NavLink></li>
-     <Link><button className="btn btn-circle bg-green-400 shadow-none border-none font-bold relative"> <span className="bg-white rounded-full absolute right-1 w-5 text-gray-700 -top-3">{cart.length} </span> <BsCart4 className="text-white text-xl font-bold"/></button></Link>
+     <Link to={'/dashboard'}><button className="btn btn-circle bg-green-400 shadow-none border-none font-bold relative"> <span className="bg-white rounded-full absolute right-1 w-5 text-gray-700 -top-3">{cart.length} </span> <BsCart4 className="text-white text-xl font-bold"/></button></Link>
      {/* user profile */}
     {
       user? <></> :<> <li > <NavLink to={'sign-in'} className="text-md font-bold text-white  uppercase">sign in</NavLink></li></>

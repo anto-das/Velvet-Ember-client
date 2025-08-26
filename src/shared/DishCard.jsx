@@ -6,7 +6,7 @@ import useCart from "../hooks/useCart";
 
 
 const DishCard = ({item}) => {
-    const{name,recipe,image,_id,price}=item;
+    const{name,recipe,image,_id,price,category}=item;
     const {user} = useAuth();
     const navigate = useNavigate();
     const axiosSecure = useAxiosSecure();
@@ -18,7 +18,8 @@ const DishCard = ({item}) => {
         email:user.email,
         name,
         image,
-        price
+        price,
+        category
       }
      if(user && user.email){
       axiosSecure.post('http://localhost:4000/carts',cartDoc)
