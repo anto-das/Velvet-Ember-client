@@ -8,7 +8,7 @@ import { IoMdCalendar } from "react-icons/io";
 import { MdContactMail } from "react-icons/md";
 import { TbMessage2Star } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router-dom";
-
+import '../files/dashboard.css'
 
 const Dashboard = () => {
     return (
