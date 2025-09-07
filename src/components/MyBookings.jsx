@@ -11,10 +11,10 @@ const MyBookings = () => {
            <TitleBox 
            title={'---Excellent Ambience---'}
             heading={'MY BOOKINGS'}></TitleBox> 
-            <div className='max-w-4xl mx-auto space-y-4'>
-                <div className='md:flex lg:flex items-center justify-between'>
-                    <p className='text-lg md:text-xl lg:text-2xl font-bold uppercase'>total boolings: {cart.length} </p>
-                    <p className='text-lg md:text-xl lg:text-2xl font-bold uppercase'>total price: {totalPrice} </p>
+            <div className='max-w-4xl mx-auto space-y-4 px-4'>
+                <div className=' flex items-center justify-between'>
+                    <p className='text-md md:text-xl lg:text-2xl font-bold uppercase'>total boolings: {cart.length} </p>
+                    <p className='text-md md:text-xl lg:text-2xl font-bold uppercase'>total price: {totalPrice} </p>
                     <button className="btn btn-md bg-[#D1A054] text-white uppercase">pay</button>
                 </div>
                 <div>
