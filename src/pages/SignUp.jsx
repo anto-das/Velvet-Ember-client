@@ -1,15 +1,18 @@
-import  { useContext } from 'react';
+import  { useContext, useState } from 'react';
 import { AuthContext } from '../providers/AuthContext';
 import signInImg from '../assets/others/authentication2.png'
 import bgImg from '../assets/others/authentication.png'
-import { FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import useAxiosPublic from '../hooks/useAxiosPublic';
 const SignUp = () => {
   const {signUp,updateUser} = useContext(AuthContext);
+   const [isShowPassword,setIsShowPassword] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
    const {
     register,
     handleSubmit,
@@ -18,12 +21,24 @@ const SignUp = () => {
 
   const onSubmit = data =>{
     const {name,email,password,photo} = data;
-    console.log(data)
     signUp(email,password)
     .then(() =>{
       updateUser({displayName:name,photoURL:photo})
-      toast.success('sign up successfully')
-      navigate( location.state ||'/')
+      // user info entry in the database
+      .then(() =>{
+        const userInfo = {
+          name:name,
+          email:email
+        }
+        axiosPublic.post('/users',userInfo)
+        .then(res =>{
+          console.log(res.data)
+          if(res.data.insertedId){
+            toast.success('sign up successfully')
+          navigate( location.state ||'/')
+          }
+        })
+      })
     })
     .catch(err => toast.error(err.message))
   }
@@ -56,15 +71,20 @@ const SignUp = () => {
                      {errors.email && <span className='text-red-500'>Email is required</span>}
                </div>
                {/* password field */}
-               <div>
+               <div className='relative'>
                  <label className="label">Password</label>
-               <input type="password" {...register("password",
+               <input 
+               type={isShowPassword ? "text" :"password"}
+                {...register("password",
                 { required: true,
                   minLength:6,
                   maxLength:20,
                   pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).*$/
                 },
                 )} name='password' className="input w-full" placeholder="Password" />
+                {
+                            isShowPassword ? <span onClick={() =>setIsShowPassword(!isShowPassword)} className='text-center z-1 text-lg absolute top-8 right-5'><FaEye /></span> : <span onClick={() =>setIsShowPassword(!isShowPassword)} className='text-center text-lg absolute z-1 top-8 right-5 '><FaEyeSlash /></span>
+                          }
                 {errors.password?.type ==='required' && <span className='text-red-500'>Password is required</span>}
                 {errors.password?.type==='minLength' && <span className='text-red-500'>Password must be 6 characters</span>}
                 {errors.password?.type==='maxLength' && <span className='text-red-500'>Password less then 20 characters</span>}
