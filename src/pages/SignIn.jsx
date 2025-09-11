@@ -3,10 +3,11 @@ import signInImg from '../assets/others/authentication2.png'
 import bgImg from '../assets/others/authentication.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { useContext, useEffect, useState } from 'react';
-import { FaEye, FaEyeSlash, FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, } from 'react-icons/fa';
 import { AuthContext } from '../providers/AuthContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import SocialLogin from '../components/SocialLogin';
 const SignIn = () => {
   const {signIn} =useContext(AuthContext);
   const [disabled,setDisabled] = useState(true);
@@ -69,17 +70,7 @@ const SignIn = () => {
           
         </form>
           <p className='text-center text-lg text-gray-700 font-bold'>Or sign in with</p>
-          <div className='flex justify-center gap-8 md:gap-10 lg:gap-10'>
-            <div className='border-2 border-[#444444] text-xl btn btn-circle'>
-            <FaFacebookF  />
-          </div>
-          <div className='border-2 border-[#444444] text-xl btn btn-circle'>
-            <FaGoogle />
-          </div>
-          <div className='border-2 border-[#444444] text-xl btn btn-circle'>
-          <FaGithub />
-          </div>
-          </div>
+          <SocialLogin></SocialLogin>
       </div>
     </div>
   </div>

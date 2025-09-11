@@ -2,11 +2,12 @@ import  { useContext, useState } from 'react';
 import { AuthContext } from '../providers/AuthContext';
 import signInImg from '../assets/others/authentication2.png'
 import bgImg from '../assets/others/authentication.png'
-import { FaEye, FaEyeSlash, FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
+import { FaEye, FaEyeSlash,} from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import useAxiosPublic from '../hooks/useAxiosPublic';
+import SocialLogin from '../components/SocialLogin';
 const SignUp = () => {
   const {signUp,updateUser} = useContext(AuthContext);
    const [isShowPassword,setIsShowPassword] = useState(false);
@@ -96,17 +97,7 @@ const SignUp = () => {
               <p className='w-full text-center text-[20px] capitalize text-[#cc7d05] '>Already Registered?  <Link to={'/sign-in'}><span className='font-bold hover:link'>go to sign in</span></Link> </p>
              </form>
                <p className='text-center text-lg text-gray-700 font-bold'>Or sign in with</p>
-               <div className='flex justify-center gap-8 md:gap-10 lg:gap-10'>
-                 <div className='border-2 border-[#444444] text-xl btn btn-circle'>
-                 <FaFacebookF  />
-               </div>
-               <div className='border-2 border-[#444444] text-xl btn btn-circle'>
-                 <FaGoogle />
-               </div>
-               <div className='border-2 border-[#444444] text-xl btn btn-circle'>
-               <FaGithub />
-               </div>
-               </div>
+               <SocialLogin></SocialLogin>
            </div>
          </div>
        </div>

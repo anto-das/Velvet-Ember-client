@@ -34,11 +34,11 @@ const AuthProvider = ({children}) => {
         }
     },[])
     const authInfo ={
+        loading,
         signUp,
         signIn,
         user,
         setUser,
-        loading,
         updateUser,
         logout
     }
