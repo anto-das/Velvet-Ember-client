@@ -3,7 +3,7 @@ import useCart from "../hooks/useCart";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const DashboardTable = () => {
+const MyBookingsTable = () => {
     const [cart,refetch] = useCart();
     const axiosSecure= useAxiosSecure();
     const handleDelete = id =>{
@@ -71,4 +71,4 @@ const DashboardTable = () => {
     );
 };
 
-export default DashboardTable;
+export default MyBookingsTable;
