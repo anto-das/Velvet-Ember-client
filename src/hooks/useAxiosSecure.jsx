@@ -1,9 +1,13 @@
 import axios from "axios";
+import useAuth from "./useAuth";
+import { useNavigate } from "react-router-dom";
 
  const axiosSecure = axios.create({
     baseURL:'http://localhost:4000'
 })
 const useAxiosSecure = () => {
+    const {logout} =useAuth();
+    const navigate = useNavigate();
     axiosSecure.interceptors.request.use((config)=>{
         const token = localStorage.getItem('access-token')
         if(token){
@@ -19,9 +23,10 @@ const useAxiosSecure = () => {
 
     axiosSecure.interceptors.response.use((response)=>{
         return response;
-    }, (error) =>{
+    }, async (error) =>{
         if(error.response.status === 401 || error.response.status === 403){
-            console.log(error.response.status)
+           await logout()
+           navigate('/sign-in')
         }
         return Promise.reject(error)
     } )

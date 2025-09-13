@@ -11,9 +11,10 @@ import { NavLink, Outlet } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import IsAdminLinks from "../DashboardComponents/IsAdminLinks";
 import UserLinks from "../DashboardComponents/UserLinks";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     return (
         <>
         <Helmet>
