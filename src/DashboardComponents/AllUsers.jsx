@@ -3,16 +3,57 @@ import TitleBox from "../components/TitleBox";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const AllUsers = () => {
     const axiosSecure = useAxiosSecure();
-    const {data : users=[]} = useQuery({
+    const {data : users=[],refetch} = useQuery({
         queryKey:['users'],
         queryFn:async () =>{
             const {data} = await axiosSecure.get('/users');
             return data
         }
     })
+    const handleMakeAdmin = user =>{
+      console.log(user._id)
+      axiosSecure.patch(`/users/admin/${user._id}`)
+      .then(res =>{
+        console.log(res.data)
+        if(res.data.modifiedCount > 0){
+          refetch()
+          toast.success(`${user.name} is an admin now`)
+        }
+      })
+      .catch(err => console.log(err))
+    }
+
+
+     const handleUserDelete = id =>{
+            Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${id}`)
+            .then(res =>{
+                if(res.data.deletedCount > 0){
+                    refetch()
+                Swal.fire({
+                      title: "Deleted!",
+                      text: "Your file has been deleted.",
+                      icon: "success"
+                    });
+                }
+            })
+      }
+    });
+        }
     return (
         <div >
             <TitleBox title={'---How many??---'} heading={'MANAGE ALL USERS'}></TitleBox>
@@ -36,8 +77,12 @@ const AllUsers = () => {
         <th>{indx+1}</th>
         <td>{user.name}</td>
         <td> {user.email} </td>
-        <td className="bg-[#D1A054] btn text-lg text-white"> <FaUsers className="text-center"/> </td>
-        <td><RiDeleteBin6Line className="text-red-500 text-2xl btn btn-xs"/></td>
+        <td>
+          {
+            user.role === 'admin' ? 'admin' :   <button  onClick={() =>handleMakeAdmin(user)}  className="bg-[#D1A054] btn text-lg text-white items-center mt-1"> <FaUsers className="text-center"/> </button>
+          }
+        </td>
+        <td onClick={() => handleUserDelete(user._id)}><RiDeleteBin6Line className="text-red-500 text-2xl"/></td>
       </tr>)
       }
     </tbody>

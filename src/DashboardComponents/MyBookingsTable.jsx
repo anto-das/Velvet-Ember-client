@@ -21,7 +21,6 @@ const MyBookingsTable = () => {
         .then(res =>{
             if(res.data.deletedCount > 0){
                 refetch()
-                console.log(res)
             Swal.fire({
                   title: "Deleted!",
                   text: "Your file has been deleted.",
@@ -62,7 +61,7 @@ const MyBookingsTable = () => {
           {item.category}
         </td>
         <td>{item.price}</td>
-        <td><RiDeleteBin6Line onClick={() =>handleDelete(item._id)} className="text-red-500 text-2xl btn btn-xs"/></td>
+        <td ><RiDeleteBin6Line onClick={() =>handleDelete(item._id)} className="text-red-500 text-2xl"/></td>
       </tr>)
       }
     </tbody>
