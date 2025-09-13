@@ -18,10 +18,10 @@ const SocialLogin = () => {
       }
       axiosPublic.post('/users',userInfo)
     .then(res =>{
-      console.log(res.data)
+      toast.error(res.data.message)
       navigate('/')
-      .catch(err => toast.error(err.message))
     })
+    .catch(err => toast.error(err.message))
     })
     .catch(err => toast.error(err.message))
   }
