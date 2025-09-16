@@ -10,7 +10,6 @@ import './navbar.css'
 const Navbar = () => {
   const {logout,user} = useContext(AuthContext);
   const [cart] =useCart();
-  console.log(cart)
   const handleSignOut = () =>{
     logout()
     .then(() =>{

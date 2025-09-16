@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+
 import TitleBox from "./TitleBox"
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -8,13 +8,17 @@ import { Rating } from '@smastrom/react-rating'
 
 import '@smastrom/react-rating/style.css'
 import { ImQuotesLeft } from "react-icons/im";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 const Testimonials= () =>{
-    const [reviews,setReviews] = useState([]);
-    useEffect(() =>{
-        fetch('http://localhost:4000/review')
-        .then(res =>res.json())
-        .then(data => setReviews(data))
-    },[])
+    const axiosPublic = useAxiosPublic();
+    const {data:reviews=[]} = useQuery({
+        queryKey:['reviews'],
+        queryFn:async()=>{
+            const {data}= await axiosPublic.get('/review')
+            return data;
+        }
+    })
     return(
         <section>
             <TitleBox

@@ -13,6 +13,7 @@ import PrivateRoute from './PrivateRoute';
 import Dashboard from '../layouts/Dashboard';
 import MyBookings from '../DashboardComponents/MyBookings';
 import AllUsers from '../DashboardComponents/AllUsers';
+import AddItem from '../DashboardComponents/AddItem';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -76,7 +77,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/dashboard/add-items',
-        element:<div>add items</div>
+        element:<AddItem></AddItem>
       },
       {
         path:'/dashboard/manage-items',
