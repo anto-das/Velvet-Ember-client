@@ -33,7 +33,7 @@ const Dashboard = () => {
                 </ul>
             </div>
          <Sidebar isAdmin={isAdmin}></Sidebar>
-            <div className="flex-1 bg-base-300">
+            <div className="flex-1 bg-base-white">
                 <Outlet></Outlet>
             </div>
         </div>

@@ -14,6 +14,7 @@ import Dashboard from '../layouts/Dashboard';
 import MyBookings from '../DashboardComponents/MyBookings';
 import AllUsers from '../DashboardComponents/AllUsers';
 import AddItem from '../DashboardComponents/AddItem';
+import AdminRoute from './AdminRoute';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -77,7 +78,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/dashboard/add-items',
-        element:<AddItem></AddItem>
+        element:<AdminRoute><AddItem></AddItem></AdminRoute>
       },
       {
         path:'/dashboard/manage-items',
@@ -89,7 +90,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/dashboard/users',
-        element:<AllUsers></AllUsers>
+        element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
       },
     ]
   }
