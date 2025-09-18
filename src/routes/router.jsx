@@ -78,7 +78,8 @@ const router = createBrowserRouter([
       },
       {
         path:'/dashboard/add-items',
-        element:<AdminRoute><AddItem></AddItem></AdminRoute>
+        element:<AddItem></AddItem>
+        // element:<AdminRoute><AddItem></AddItem></AdminRoute>
       },
       {
         path:'/dashboard/manage-items',

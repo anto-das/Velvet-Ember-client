@@ -3,11 +3,14 @@ import { FaUtensils } from 'react-icons/fa';
 import TitleBox from '../components/TitleBox';
 import { useForm, } from "react-hook-form"
 import useAxiosPublic from '../hooks/useAxiosPublic';
+import useAxiosSecure from '../hooks/useAxiosSecure';
+import toast from 'react-hot-toast';
 const hosting_image_key= import.meta.env.VITE_HOSTING_IMAGE_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${hosting_image_key}`;
 const AddItem = () => {
   const axiosPublic = useAxiosPublic();
-    const {handleSubmit,register} = useForm();
+  const axiosSecure = useAxiosSecure();
+    const {handleSubmit,register,reset} = useForm();
     const onSubmit = async data =>{
         console.log(data)
         const imgData ={image: data.image[0]}
@@ -16,7 +19,20 @@ const AddItem = () => {
         "content-type": "multipart/form-data",
       }
         })
-        console.log(res.data)
+       if(res.data.success){
+        const menuItem = {
+          name:data.name,
+          category:data.category,
+          price:parseFloat(data.price),
+          recipe:data.recipe,
+          image: res.data.data.display_url
+        }
+        const menuRes = await axiosSecure.post('/menu',menuItem);
+       if(menuRes.data.insertedId){
+        reset();
+        toast.success(`${data.name} is added to the menu`)
+       }
+       }
     }
     return (
         <div className=''>
