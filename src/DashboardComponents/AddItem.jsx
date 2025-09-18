@@ -2,10 +2,21 @@
 import { FaUtensils } from 'react-icons/fa';
 import TitleBox from '../components/TitleBox';
 import { useForm, } from "react-hook-form"
+import useAxiosPublic from '../hooks/useAxiosPublic';
+const hosting_image_key= import.meta.env.VITE_HOSTING_IMAGE_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${hosting_image_key}`;
 const AddItem = () => {
+  const axiosPublic = useAxiosPublic();
     const {handleSubmit,register} = useForm();
-    const onSubmit = data =>{
+    const onSubmit = async data =>{
         console.log(data)
+        const imgData ={image: data.image[0]}
+        const res = await axiosPublic.post(image_hosting_api,imgData,{
+          headers: {
+        "content-type": "multipart/form-data",
+      }
+        })
+        console.log(res.data)
     }
     return (
         <div className=''>
@@ -28,9 +39,9 @@ const AddItem = () => {
                       <legend className="fieldset-legend">Category*</legend>
                       <select 
                       {...register("category",{required:true})} 
-                      defaultValue="category"
+                      defaultValue={'Category'}
                        className="select border-none w-full mt-2">
-                        <option defaultValue={true}>Category</option>
+                        <option disabled defaultValue={true}>Category</option>
                         <option value={'salad'}>Salad</option>
                         <option value={'soup'}>Soup</option>
                         <option value={'pizza'}>Pizza</option>
