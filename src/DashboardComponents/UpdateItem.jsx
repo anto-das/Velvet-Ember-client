@@ -1,5 +1,5 @@
 
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import TitleBox from '../components/TitleBox';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -13,7 +13,8 @@ const image_hosting_api = `https://api.imgbb.com/1/upload?key=${hosting_image_ke
 
 const UpdateItem = () => {
     const {handleSubmit,register,reset} = useForm();
-    const {name,category,price,recipe} = useLoaderData();
+    const {name,category,price,recipe,_id} = useLoaderData();
+    const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
       const axiosSecure = useAxiosSecure();
 
@@ -25,17 +26,19 @@ const UpdateItem = () => {
       }
         })
        if(res.data.success){
-        const menuItem = {
+        const updatedItem = {
           name:data.name,
           category:data.category,
           price:parseFloat(data.price),
           recipe:data.recipe,
           image: res.data.data.display_url
         }
-        const menuRes = await axiosSecure.post('/menu',menuItem);
-       if(menuRes.data.insertedId){
+        const menuRes = await axiosSecure.patch(`/menu/${_id}`,updatedItem);
+        console.log(menuRes)
+       if(menuRes.data.modifiedCount > 0){
         reset();
-        toast.success(`${data.name} is added to the menu`)
+        navigate('/dashboard/manage-items')
+        toast.success(`${name} is updated to the menu`)
        }
        }
     }
