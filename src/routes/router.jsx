@@ -16,6 +16,7 @@ import AllUsers from '../DashboardComponents/AllUsers';
 import AddItem from '../DashboardComponents/AddItem';
 import AdminRoute from './AdminRoute';
 import ManageItem from '../DashboardComponents/ManageItem';
+import UpdateItem from '../DashboardComponents/UpdateItem';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -74,23 +75,28 @@ const router = createBrowserRouter([
 
       // admin routes
       {
-        path:"/dashboard/admin-home",
+        path:"admin-home",
         element:<div>admin home</div>
       },
       {
-        path:'/dashboard/add-items',
+        path:'add-items',
         element:<AdminRoute><AddItem></AddItem></AdminRoute>
       },
       {
-        path:'/dashboard/manage-items',
+        path:'update-item/:id',
+        element:<AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
+        loader:({params}) => fetch(`http://localhost:4000/menu/${params.id}`)
+      },
+      {
+        path:'manage-items',
         element:<AdminRoute><ManageItem></ManageItem></AdminRoute>
       },
       {
-        path:'/dashboard/bookings',
+        path:'bookings',
         element:<div>manage bookings</div>
       },
       {
-        path:'/dashboard/users',
+        path:'users',
         element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
       },
     ]

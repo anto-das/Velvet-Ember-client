@@ -5,6 +5,7 @@ import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useQueryClient } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const ManageItem = () => {
     const queryClient = useQueryClient();
@@ -74,7 +75,9 @@ const ManageItem = () => {
           {item.name}
         </td>
         <td>{item.price}</td>
-        <td ><FaEdit className=" text-[#D1A054] text-2xl text-center"/></td>
+        <Link to={`/dashboard/update-item/${item._id}`}>
+          <td ><FaEdit className=" text-[#D1A054] text-2xl text-center"/></td>
+        </Link>
         <td onClick={() => handleItemDelete(item)}><RiDeleteBin6Line className="text-red-500 text-2xl"/></td>
       </tr>)
       }
