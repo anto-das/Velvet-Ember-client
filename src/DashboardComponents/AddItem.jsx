@@ -12,7 +12,6 @@ const AddItem = () => {
   const axiosSecure = useAxiosSecure();
     const {handleSubmit,register,reset} = useForm();
     const onSubmit = async data =>{
-        console.log(data)
         const imgData ={image: data.image[0]}
         const res = await axiosPublic.post(image_hosting_api,imgData,{
           headers: {

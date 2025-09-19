@@ -2,12 +2,38 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import TitleBox from "../components/TitleBox";
 import useMenu from "../hooks/useMenu";
 import { FaEdit } from "react-icons/fa";
-
+import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useQueryClient } from "@tanstack/react-query";
 
 const ManageItem = () => {
-    const [menu] = useMenu();
-    const handleItemDelete =id =>{
-        console.log(id)
+    const queryClient = useQueryClient();
+    const [items] = useMenu();
+    const axiosSecure = useAxiosSecure();
+    const handleItemDelete = item =>{
+        Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then( (result) => {
+  if (result.isConfirmed) {
+    axiosSecure.delete(`/menu/${item._id}`)
+     .then( res =>{
+                if(res.data.deletedCount > 0){
+                    queryClient.invalidateQueries(["menu"]);
+                Swal.fire({
+                      title: "Deleted!",
+                      text: "Your file has been deleted.",
+                      icon: "success"
+                    });
+                }
+            })
+  }
+});
     }
     return (
         <div>
@@ -16,20 +42,20 @@ const ManageItem = () => {
                 <div className="overflow-x-auto">
   <table className="table">
     {/* head */}
-    <thead>
+    <thead className="bg-[#D1A054]">
       <tr>
         <th></th>
-        <th>Item Image</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Action</th>
-        <th>Action</th>
+        <th className="text-white">Item Image</th>
+        <th className="text-white">Name</th>
+        <th className="text-white">Price</th>
+        <th className="text-white">Action</th>
+        <th className="text-white">Action</th>
       </tr>
     </thead>
     <tbody>
       {/* row 1 */}
       {
-        menu.map((item,index) =><tr key={item._id}>
+        items.map((item,index) =><tr key={item._id}>
         <th>
          {index+1}
         </th>
@@ -48,8 +74,8 @@ const ManageItem = () => {
           {item.name}
         </td>
         <td>{item.price}</td>
-        <td onClick={() => handleEditItem(user._id)}><FaEdit className=" text-[#D1A054] text-2xl text-center"/></td>
-        <td onClick={() => handleItemDelete(item._id)}><RiDeleteBin6Line className="text-red-500 text-2xl"/></td>
+        <td ><FaEdit className=" text-[#D1A054] text-2xl text-center"/></td>
+        <td onClick={() => handleItemDelete(item)}><RiDeleteBin6Line className="text-red-500 text-2xl"/></td>
       </tr>)
       }
     </tbody>

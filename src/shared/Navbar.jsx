@@ -7,8 +7,10 @@ import toast from "react-hot-toast";
 import useCart from "../hooks/useCart";
 import Profile from "../components/Profile";
 import './navbar.css'
+// import useAdmin from "../hooks/useAdmin";
 const Navbar = () => {
   const {logout,user} = useContext(AuthContext);
+  // const [isAdmin] = useAdmin();
   const [cart] =useCart();
   const handleSignOut = () =>{
     logout()
@@ -20,7 +22,7 @@ const Navbar = () => {
      <ul className="menu items-center menu-vertical lg:menu-horizontal md:menu-horizontal px-1 w-full gap-3">
       <li  className="text-md font-bold text-white uppercase" ><NavLink to={'/'}>home</NavLink></li>
      <li> <NavLink  to={'/contact-us'} className="text-md font-bold text-white  uppercase">contact us</NavLink></li>
-      <li ><NavLink to={'/dashboard'} className="text-md font-bold text-white  uppercase">dashboard</NavLink></li>
+      <li ><NavLink to={'/dashboard/my-bookings'} className="text-md font-bold text-white  uppercase">dashboard</NavLink></li>
      <li > <NavLink to={'/our-menu'} className="text-md font-bold text-white  uppercase">our menu</NavLink></li>
      <li > <NavLink to={'/our-shop/salad'} className="text-md font-bold text-white  uppercase">our shop</NavLink></li>
      <Link to={'/dashboard/my-bookings'}><button className="btn btn-circle bg-green-400 shadow-none border-none font-bold relative"> <span className="bg-white rounded-full absolute right-1 w-5 text-gray-700 -top-3">{cart.length} </span> <BsCart4 className="text-white text-xl font-bold"/></button></Link>
