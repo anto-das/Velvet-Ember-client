@@ -17,6 +17,7 @@ import AddItem from '../DashboardComponents/AddItem';
 import AdminRoute from './AdminRoute';
 import ManageItem from '../DashboardComponents/ManageItem';
 import UpdateItem from '../DashboardComponents/UpdateItem';
+import Payment from '../DashboardComponents/Payment';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -56,14 +57,14 @@ const router = createBrowserRouter([
       //   path:'/dashboard/user-home',
       //   element:<div>hello user home</div>
       // },
-      // {
-      //   path:'/dashboard/reservation',
-      //   element:<div>reservation</div>
-      // },
-      // {
-      //   path:'/dashboard/payment',
-      //   element:<div>payment</div>
-      // },
+      {
+        path:'/dashboard/reservation',
+        element:<Payment></Payment>
+      },
+      {
+        path:'/dashboard/payment',
+        element:<div>payment</div>
+      },
       // {
       //   path:'/dashboard/my-cart',
       //   element:<div>my-cart</div>

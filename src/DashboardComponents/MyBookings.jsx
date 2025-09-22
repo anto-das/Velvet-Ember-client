@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import TitleBox from '../components/TitleBox';
 import useCart from '../hooks/useCart';
 import MyBookingsTable from './MyBookingsTable';
@@ -15,7 +16,11 @@ const MyBookings = () => {
                 <div className=' flex items-center justify-between'>
                     <p className='text-sm md:text-xl lg:text-2xl font-bold uppercase'> bookings: {cart.length} </p>
                     <p className='text-sm md:text-xl lg:text-2xl font-bold uppercase'> price: {totalPrice} </p>
-                    <button className="btn btn-sm bg-[#D1A054] text-white uppercase">pay</button>
+                    {
+                        cart.length ? <Link to={'/dashboard/reservation'}>
+                            <button className="btn btn-sm bg-[#D1A054] text-white uppercase">pay</button>
+                        </Link> : <button disabled className="btn btn-sm bg-[#D1A054] text-white uppercase">pay</button>
+                    }
                 </div>
                 <div>
                    <MyBookingsTable></MyBookingsTable>
