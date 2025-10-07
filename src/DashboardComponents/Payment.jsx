@@ -11,7 +11,7 @@ const Payment = () => {
             <div className="max-w-11/14 mx-auto">
                 <Elements stripe={stripePromise}>
                     <CheckOutForm></CheckOutForm>
-                </Elements>
+                </Elements> 
             </div>
         </div>
     );

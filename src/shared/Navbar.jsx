@@ -6,6 +6,7 @@ import { BsCart4 } from "react-icons/bs";
 import toast from "react-hot-toast";
 import useCart from "../hooks/useCart";
 import Profile from "../components/Profile";
+import logo from '../assets/icon/logo.png'
 import './navbar.css'
 // import useAdmin from "../hooks/useAdmin";
 const Navbar = () => {
@@ -36,8 +37,11 @@ const Navbar = () => {
    <div className="navbar flex justify-between items-center bg-black/20 shadow-sm">
   <div className="inline">
    <Link to={'/'}>
-    <p className="capitalize shadow-none border-none text-lg font-bold text-white">velvet <span className='text-amber-500'> ember</span> 
+    <div className="flex gap-1 items-center justify-center">
+      <img src={logo} className="w-8 mb-3" alt="" />
+      <p className=" capitalize shadow-none border-none text-lg font-bold text-white">velvet <span className='text-amber-500'> ember</span> 
     </p>
+    </div>
    </Link>
   </div>
   <div className="flex items-center">
