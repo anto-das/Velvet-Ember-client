@@ -6,7 +6,7 @@ import MyBookingsTable from './MyBookingsTable';
 
 const MyBookings = () => {
     const [cart]= useCart();
-    const totalPrice = cart.reduce((total,item) => total+item.price,0)
+    const totalPrice = cart.reduce((total,item) => (total+item.price),0)
     return (
         <div>
            <TitleBox 
