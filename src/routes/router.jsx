@@ -18,6 +18,7 @@ import AdminRoute from './AdminRoute';
 import ManageItem from '../DashboardComponents/ManageItem';
 import UpdateItem from '../DashboardComponents/UpdateItem';
 import Payment from '../DashboardComponents/Payment';
+import PaymentHistory from '../DashboardComponents/PaymentHistory';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -62,8 +63,8 @@ const router = createBrowserRouter([
         element:<Payment></Payment>
       },
       {
-        path:'/dashboard/payment',
-        element:<div>payment</div>
+        path:'/dashboard/payment-history',
+        element:<PaymentHistory></PaymentHistory>
       },
       // {
       //   path:'/dashboard/my-cart',

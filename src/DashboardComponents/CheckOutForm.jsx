@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import useCart from "../hooks/useCart";
 import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
+import { Link, } from "react-router-dom";
 const CheckOutForm = () => {
   const [error,setError] = useState('');
   const [clientSecret,setClientSecret] = useState('');
-  const [cart] =useCart();
+  const [cart,refetch] =useCart();
   const axiosSecure = useAxiosSecure();
   const {user} =useAuth();
   const stripe = useStripe();
@@ -16,11 +18,13 @@ const CheckOutForm = () => {
 
     // request server side for payment intent route
     useEffect(()=>{
-      axiosSecure.post('/create-payment-intent',{price:totalPrice})
+      if(totalPrice>0){
+        axiosSecure.post('/create-payment-intent',{price:totalPrice})
       .then(res =>{
         console.log(res.data.clientSecret)
         setClientSecret(res.data.clientSecret)
       })
+      }
     },[axiosSecure,totalPrice])
 
     const handleSubmit = async (event) =>{
@@ -59,8 +63,8 @@ const CheckOutForm = () => {
         } else{ 
           console.log("payment Intent",paymentIntent)
           if(paymentIntent.status ==='succeeded'){
-            console.log('payment transaction id',paymentIntent.id)
-            setTransactionId(paymentIntent.transactionId)
+            // console.log('payment transaction id',paymentIntent)
+            setTransactionId(paymentIntent.id)
 
 
             // now save the payment in the database
@@ -68,14 +72,17 @@ const CheckOutForm = () => {
               email: user.email,
               price: totalPrice,
               date: new Date(),
-              transactionId: paymentIntent.transactionId,
+              transactionId: paymentIntent.id,
               cartIds: cart.map(item => item._id),
               menuIds: cart.map(item => item.menuId),
               status:'pending'
             }
 
             const { data } = await axiosSecure.post('/payments',payment)
-            console.log(data)
+            if(data?.paymentResult?.insertedId && data?.deleteResult?.deletedCount){
+              toast.success('Thank you for paying us!')
+              refetch()
+            }
           }
         }
     }
@@ -101,7 +108,8 @@ const CheckOutForm = () => {
         Pay
       </button>
       <p className="text-red-500">{error}</p>
-      {transactionId && <p className="text-green-500">Your transaction id: {transactionId}</p>}
+    {transactionId && <p className="text-green-500">Your transaction id: {transactionId}</p>}
+    {transactionId && <Link to={'/dashboard/payment-history'}><button className="btn my-5 bg-[#b58130] text-white w-full">View Payment History</button></Link>}
         </form>
     );
 };
