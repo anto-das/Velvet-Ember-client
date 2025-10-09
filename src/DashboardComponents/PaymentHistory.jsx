@@ -2,14 +2,19 @@ import { useState } from "react";
 import TitleBox from "../components/TitleBox";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 
 const PaymentHistory = () => {
     const axiosSecure = useAxiosSecure();
-    const [paymentHistory,setPaymentHistory] = useState();
     const {user} = useAuth();
-    axiosSecure.get(`/payments/${user.email}`)
-    .then(res => setPaymentHistory(res.data))
+    const {data:paymentHistory} = useQuery({
+        queryKey:['payment-history'],
+        queryFn: async() => {
+            const res =await axiosSecure.get(`/payments/${user.email}`)
+            return res.data
+        }
+    })
     return (
         <div>
             <TitleBox 
@@ -35,7 +40,7 @@ const PaymentHistory = () => {
         paymentHistory?.map((item) =>   <tr key={item._id}>
         <th>{item.email}</th>
         <td>{item.foodName}</td>
-        <td>{item.price}</td>
+        <td>${item.price}</td>
         <td> {item.date} </td>
       </tr>)
       }
