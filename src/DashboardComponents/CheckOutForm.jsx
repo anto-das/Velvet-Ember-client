@@ -21,7 +21,6 @@ const CheckOutForm = () => {
       if(totalPrice>0){
         axiosSecure.post('/create-payment-intent',{price:totalPrice})
       .then(res =>{
-        console.log(res.data.clientSecret)
         setClientSecret(res.data.clientSecret)
       })
       }
@@ -41,7 +40,6 @@ const CheckOutForm = () => {
             card
         });
         if(error){
-            console.log('stripe error', error)
             setError(error.message)
         } else{
             console.log('stripe payment method', paymentMethod)
@@ -63,7 +61,6 @@ const CheckOutForm = () => {
         } else{ 
           console.log("payment Intent",paymentIntent)
           if(paymentIntent.status ==='succeeded'){
-            // console.log('payment transaction id',paymentIntent)
             setTransactionId(paymentIntent.id)
 
 
