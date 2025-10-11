@@ -24,6 +24,7 @@ const SignIn = () => {
     const password = form.password.value;
     signIn(email,password)
     .then(()=>{
+      console.log('hello sign in')
     toast.success('sign in successfully')
     navigate( location.state || '/')
     })
