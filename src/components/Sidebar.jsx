@@ -2,15 +2,15 @@
 import { FiMenu } from "react-icons/fi";
 import IsAdminLinks from "../DashboardComponents/IsAdminLinks";
 import UserLinks from "../DashboardComponents/UserLinks";
-
+import { Link } from "react-router-dom";
+import logo from '../assets/icon/logo.png'
 const Sidebar = ({isAdmin}) => {
     return (
            <div className="drawer lg:hidden block px-3">
   <input id="my-drawer" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content flex justify-between py-4 items-center">
     {/* Page content here */}
-      <p className="capitalize rounded shadow-none border-none text-md font-bold text-white bg-[#d1a054] py-1 px-2">velvet <span className='text-black'> ember</span> 
-    </p>
+     <Link to={'/'}> <img src={logo} className="w-8 mb-3" alt="" /> </Link>
     <label htmlFor="my-drawer" className="btn btn-md bg-[#d1a054] drawer-button"> <FiMenu className="text-xl text-white font-bold"></FiMenu> </label>
   </div>
   <div className="drawer-side ">
