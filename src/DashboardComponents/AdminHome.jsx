@@ -4,6 +4,7 @@ import { GiWallet } from "react-icons/gi";
 import { PiUsersFourFill } from "react-icons/pi";
 import { SiCodechef } from "react-icons/si";
 import { FaTruckMoving } from "react-icons/fa";
+import Chart from "../components/Chart";
 const AdminHome = () => {
     const axiosSecure = useAxiosSecure();
     const {data} = useQuery({
@@ -20,7 +21,7 @@ const AdminHome = () => {
                 <div className="bg-gradient-to-l from-[#e6a3fc] to-[#c143f7] flex justify-center items-center gap-4 py-5">
                 <GiWallet className="text-4xl text-white"/>
                 <div>
-                <p className="text-3xl font-bold text-white">{data?.revenue}</p>
+                <p className="text-3xl font-bold text-white">{data?.revenue}$</p>
                     <h1 className="text-2xl font-bold text-white">Revenue</h1>
                 </div>
             </div>
@@ -46,6 +47,7 @@ const AdminHome = () => {
                 </div>
             </div>
             </div>
+            <Chart></Chart>
         </div>
     );
 };
