@@ -19,6 +19,7 @@ import ManageItem from '../DashboardComponents/ManageItem';
 import UpdateItem from '../DashboardComponents/UpdateItem';
 import Payment from '../DashboardComponents/Payment';
 import PaymentHistory from '../DashboardComponents/PaymentHistory';
+import AdminHome from '../DashboardComponents/AdminHome';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -78,7 +79,7 @@ const router = createBrowserRouter([
       // admin routes
       {
         path:"admin-home",
-        element:<div>admin home</div>
+        element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
       },
       {
         path:'add-items',
