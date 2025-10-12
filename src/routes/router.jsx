@@ -88,7 +88,7 @@ const router = createBrowserRouter([
       {
         path:'update-item/:id',
         element:<AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
-        loader:({params}) => fetch(`http://localhost:4000/menu/${params.id}`)
+        loader:({params}) => fetch(`https://velvet-ember-server.vercel.app/menu/${params.id}`)
       },
       {
         path:'manage-items',

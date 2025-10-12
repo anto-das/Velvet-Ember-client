@@ -34,7 +34,6 @@ const UpdateItem = () => {
           image: res.data.data.display_url
         }
         const menuRes = await axiosSecure.patch(`/menu/${_id}`,updatedItem);
-        console.log(menuRes)
        if(menuRes.data.modifiedCount > 0){
         reset();
         navigate('/dashboard/manage-items')

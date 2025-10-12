@@ -18,13 +18,13 @@ const AllUsers = () => {
     const handleMakeAdmin = user =>{
       axiosSecure.patch(`/users/admin/${user._id}`)
       .then(res =>{
-        console.log(res.data)
+        // console.log(res.data)
         if(res.data.modifiedCount > 0){
           refetch()
           toast.success(`${user.name} is an admin now`)
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => toast.error(err.message))
     }
 
 

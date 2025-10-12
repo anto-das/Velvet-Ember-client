@@ -22,7 +22,7 @@ const DishCard = ({item}) => {
         category
       }
      if(user && user.email){
-      axiosSecure.post('http://localhost:4000/carts',cartDoc)
+      axiosSecure.post('https://velvet-ember-server.vercel.app/carts',cartDoc)
       .then(res =>{
         if(res.data.acknowledged){
           toast.success(`${name} added to your cart`)

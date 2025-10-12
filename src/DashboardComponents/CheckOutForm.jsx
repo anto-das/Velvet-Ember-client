@@ -42,7 +42,7 @@ const CheckOutForm = () => {
         if(error){
             setError(error.message)
         } else{
-            console.log('stripe payment method', paymentMethod)
+            // console.log('stripe payment method', paymentMethod)
             setError('')
         }
 
@@ -57,9 +57,10 @@ const CheckOutForm = () => {
           },
         })
         if(paymentError){
-          console.log("paymentError", paymentError)
+          return
+          // console.log("paymentError", paymentError)
         } else{ 
-          console.log("payment Intent",paymentIntent)
+          // console.log("payment Intent",paymentIntent)
           if(paymentIntent.status ==='succeeded'){
             setTransactionId(paymentIntent.id)
 
