@@ -55,10 +55,10 @@ const router = createBrowserRouter([
         path:'/dashboard/my-bookings',
         element:<MyBookings></MyBookings>
       },
-      // {
-      //   path:'/dashboard/user-home',
-      //   element:<div>hello user home</div>
-      // },
+      {
+        path:'/dashboard/user-home',
+        element:<div>hello user home</div>
+      },
       {
         path:'/dashboard/reservation',
         element:<Payment></Payment>
@@ -67,14 +67,14 @@ const router = createBrowserRouter([
         path:'/dashboard/payment-history',
         element:<PaymentHistory></PaymentHistory>
       },
-      // {
-      //   path:'/dashboard/my-cart',
-      //   element:<div>my-cart</div>
-      // },
-      // {
-      //   path:'/dashboard/add-review',
-      //   element:<div>add review</div>
-      // },
+      {
+        path:'/dashboard/my-cart',
+        element:<div>my-cart</div>
+      },
+      {
+        path:'/dashboard/add-review',
+        element:<div>add review</div>
+      },
 
       // admin routes
       {

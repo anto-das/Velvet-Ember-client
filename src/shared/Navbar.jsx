@@ -23,7 +23,6 @@ const Navbar = () => {
   const navOptions = <>
      <ul className="menu items-center menu-vertical lg:menu-horizontal md:menu-horizontal px-1 w-full gap-3">
       <li  className="text-md font-bold text-white uppercase" ><NavLink to={'/'}>home</NavLink></li>
-     <li> <NavLink  to={'/contact-us'} className="text-md font-bold text-white  uppercase">contact us</NavLink></li>
       <li ><NavLink to={isAdmin ?'/dashboard/admin-home':'/dashboard/my-bookings'} className="text-md font-bold text-white  uppercase">dashboard</NavLink></li>
      <li > <NavLink to={'/our-menu'} className="text-md font-bold text-white  uppercase">our menu</NavLink></li>
      <li > <NavLink to={'/our-shop/salad'} className="text-md font-bold text-white  uppercase">our shop</NavLink></li>
