@@ -20,6 +20,8 @@ import UpdateItem from '../DashboardComponents/UpdateItem';
 import Payment from '../DashboardComponents/Payment';
 import PaymentHistory from '../DashboardComponents/PaymentHistory';
 import AdminHome from '../DashboardComponents/AdminHome';
+import ManageBooking from '../DashboardComponents/ManageBooking';
+import UserHome from '../DashboardComponents/UserHome';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -57,7 +59,7 @@ const router = createBrowserRouter([
       },
       {
         path:'/dashboard/user-home',
-        element:<div>hello user home</div>
+        element:<UserHome></UserHome>
       },
       {
         path:'/dashboard/reservation',
@@ -96,7 +98,7 @@ const router = createBrowserRouter([
       },
       {
         path:'bookings',
-        element:<div>manage bookings</div>
+        element:<AdminRoute><ManageBooking></ManageBooking></AdminRoute>
       },
       {
         path:'users',

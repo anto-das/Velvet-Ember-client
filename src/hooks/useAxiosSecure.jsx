@@ -3,7 +3,8 @@ import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
 
  const axiosSecure = axios.create({
-    baseURL:'https://velvet-ember-server.vercel.app'
+    baseURL:'http://localhost:4000'
+    // baseURL:'https://velvet-ember-server.vercel.app'
 })
 const useAxiosSecure = () => {
     const {logout} =useAuth();
