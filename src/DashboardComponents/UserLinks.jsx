@@ -14,7 +14,6 @@ const UserLinks = () => {
        <li> <NavLink to={'/dashboard/user-home'} className="flex items-center justify-start gap-1"><FaHome className="text-black text-xl"/> <span className="text-black font-bold uppercase">user Home</span> </NavLink></li>
                  <li> <NavLink to={'/dashboard/reservation'} className="flex items-center justify-start gap-1"><FaCalendarDays className="text-black text-xl"/> <span className="text-black font-bold uppercase"> reservation</span> </NavLink></li>
                  <li> <NavLink to={'/dashboard/payment-history'} className="flex items-center justify-start gap-1"><GiWallet className="text-black text-xl"/> <span className="text-black font-bold uppercase"> payment history</span> </NavLink></li>
-                 <li> <NavLink to={'/dashboard/my-cart'} className="flex items-center justify-start gap-1"><BsCart4 className="text-black text-xl"/> <span className="text-black font-bold uppercase"> my cart</span> </NavLink></li>
                  <li> <NavLink to={'/dashboard/add-review'} className="flex items-center justify-start gap-1"><TbMessage2Star className="text-black text-xl"/> <span className="text-black font-bold uppercase"> add review</span> </NavLink></li>
                  <li> <NavLink to={'/dashboard/my-bookings'} className="flex items-center justify-start gap-1"><IoMdCalendar className="text-black text-xl"/> <span className="text-black font-bold uppercase"> my booking</span> </NavLink></li>
                  <div className="divider divider-neutral"></div>

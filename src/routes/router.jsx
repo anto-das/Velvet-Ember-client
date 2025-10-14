@@ -22,6 +22,7 @@ import PaymentHistory from '../DashboardComponents/PaymentHistory';
 import AdminHome from '../DashboardComponents/AdminHome';
 import ManageBooking from '../DashboardComponents/ManageBooking';
 import UserHome from '../DashboardComponents/UserHome';
+import AddReview from '../DashboardComponents/AddReview';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -70,12 +71,8 @@ const router = createBrowserRouter([
         element:<PaymentHistory></PaymentHistory>
       },
       {
-        path:'/dashboard/my-cart',
-        element:<div>my-cart</div>
-      },
-      {
         path:'/dashboard/add-review',
-        element:<div>add review</div>
+        element:<AddReview></AddReview>
       },
 
       // admin routes
