@@ -9,17 +9,26 @@ import useAuth from '../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import useCart from '../hooks/useCart';
 import { MdMenuBook } from "react-icons/md";
+import useAxiosPublic from '../hooks/useAxiosPublic';
 
 const UserHome = () => {
    const [menu] = useMenu();
    const [cart] = useCart()
     const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
     const {user} = useAuth();
     const {data} = useQuery({
         queryKey:['payment-history'],
         queryFn: async() => {
             const res =await axiosSecure.get(`/payments/${user.email}`)
             return res.data
+        }
+    })
+     const {data:reviews=[]} = useQuery({
+        queryKey:['reviews'],
+        queryFn:async()=>{
+            const {data}= await axiosPublic.get('/review')
+            return data;
         }
     })
     return (
@@ -65,7 +74,7 @@ const UserHome = () => {
                           <div className=' w-full bg-[#fef9c3] flex flex-col justify-center items-center'>
                             <h1 className='text-3xl font-light font-[Cinzel]'>Your Activites</h1>
                            <p className='flex text-blue-500 items-center gap-1 text-xl font-semibold'> <FaCartPlus></FaCartPlus>  Activites: {cart?.length} </p>
-                           <p className='flex text-[#00c4a1] items-center gap-1 text-xl font-semibold'> <IoMdStar className='text-2xl' /> Reviews: {cart?.length} </p>
+                           <p className='flex text-[#00c4a1] items-center gap-1 text-xl font-semibold'> <IoMdStar className='text-2xl' /> Reviews: {reviews?.length} </p>
                            <p className='flex text-red-400 items-center gap-1 text-xl font-semibold'> <GiWallet></GiWallet>  Payments: {data?.length} </p>
                           </div>
                           </div>

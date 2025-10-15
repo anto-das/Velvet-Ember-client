@@ -11,10 +11,9 @@ const StarRating = ({value,onchange}) => {
                     onClick={() =>onchange(star)}
                     onMouseEnter={()=>setHover(star)}
                     onMouseLeave={()=>setHover(null)}
-                    className={(value || hover) >= star ? 'text-xl text-amber-600 transition duration-400' :'text-xl'}
+                    className={(value || hover) >= star ? 'text-xl text-amber-600 transition duration-800' :'text-xl'}
                     />
                 )
-                    
                 )
             }
         </div>
