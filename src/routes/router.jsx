@@ -23,10 +23,12 @@ import AdminHome from '../DashboardComponents/AdminHome';
 import ManageBooking from '../DashboardComponents/ManageBooking';
 import UserHome from '../DashboardComponents/UserHome';
 import AddReview from '../DashboardComponents/AddReview';
+import ErrorElement from '../components/ErrorElement/ErrorElement';
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement:<ErrorElement></ErrorElement>,
     children:[
       {
         path:'/',

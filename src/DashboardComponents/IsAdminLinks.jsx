@@ -17,7 +17,6 @@ const IsAdminLinks = () => {
                           <li> <NavLink to={'/'} className="flex items-center justify-start gap-1"><FaHome className="text-black text-xl"/> <span className="text-black font-bold uppercase"> Home</span> </NavLink></li>
                            <li> <NavLink to={'/our-menu'} className="flex items-center justify-start gap-1"><FiMenu className="text-black text-xl"/> <span className="text-black font-bold uppercase">menu</span> </NavLink></li>
                             <li> <NavLink to={'/our-shop/salad'} className="flex items-center justify-start gap-1"><GiShoppingBag className="text-black text-xl"/> <span className="text-black font-bold uppercase">shop</span> </NavLink></li>
-                             <li> <NavLink to={'/contact-us'} className="flex items-center justify-start gap-1"><MdContactMail className="text-black text-xl"/> <span className="text-black font-bold uppercase">contact</span> </NavLink></li>
         </>
     );
 };
