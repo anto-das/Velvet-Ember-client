@@ -1,4 +1,4 @@
-import React from 'react'
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -28,80 +28,80 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement:<ErrorElement></ErrorElement>,
-    children:[
+    errorElement: <ErrorElement></ErrorElement>,
+    children: [
       {
-        path:'/',
-        element:<Home></Home>
+        path: '/',
+        element: <Home></Home>
       },
       {
-        path:'/our-menu',
-        element:<OurMenu></OurMenu>
+        path: '/our-menu',
+        element: <OurMenu></OurMenu>
       },
       {
-        path:'/our-shop/:category',
-        element:<PrivateRoute><OurShop></OurShop></PrivateRoute>
+        path: '/our-shop/:category',
+        element: <PrivateRoute><OurShop></OurShop></PrivateRoute>
       },
       {
-        path:'/sign-up',
-        element:<SignUp></SignUp>
+        path: '/sign-up',
+        element: <SignUp></SignUp>
       },
       {
-        path:'/sign-in',
-        element:<SignIn></SignIn>
+        path: '/sign-in',
+        element: <SignIn></SignIn>
       }
     ]
   },
   {
-    path:'/dashboard',
-    element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-    children:[
+    path: '/dashboard',
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    children: [
       {
-        path:'/dashboard/my-bookings',
-        element:<MyBookings></MyBookings>
+        path: '/dashboard/my-bookings',
+        element: <MyBookings></MyBookings>
       },
       {
-        path:'/dashboard/user-home',
-        element:<UserHome></UserHome>
+        path: '/dashboard/user-home',
+        element: <UserHome></UserHome>
       },
       {
-        path:'/dashboard/reservation',
-        element:<Payment></Payment>
+        path: '/dashboard/reservation',
+        element: <Payment></Payment>
       },
       {
-        path:'/dashboard/payment-history',
-        element:<PaymentHistory></PaymentHistory>
+        path: '/dashboard/payment-history',
+        element: <PaymentHistory></PaymentHistory>
       },
       {
-        path:'/dashboard/add-review',
-        element:<AddReview></AddReview>
+        path: '/dashboard/add-review',
+        element: <AddReview></AddReview>
       },
 
       // admin routes
       {
-        path:"admin-home",
-        element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
+        path: "admin-home",
+        element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
       },
       {
-        path:'add-items',
-        element:<AdminRoute><AddItem></AddItem></AdminRoute>
+        path: 'add-items',
+        element: <AdminRoute><AddItem></AddItem></AdminRoute>
       },
       {
-        path:'update-item/:id',
-        element:<AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
-        loader:({params}) => fetch(`https://velvet-ember-server.vercel.app/menu/${params.id}`)
+        path: 'update-item/:id',
+        element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
+        loader: ({ params }) => fetch(`https://velvet-ember-server.vercel.app/menu/${params.id}`)
       },
       {
-        path:'manage-items',
-        element:<AdminRoute><ManageItem></ManageItem></AdminRoute>
+        path: 'manage-items',
+        element: <AdminRoute><ManageItem></ManageItem></AdminRoute>
       },
       {
-        path:'bookings',
-        element:<AdminRoute><ManageBooking></ManageBooking></AdminRoute>
+        path: 'bookings',
+        element: <AdminRoute><ManageBooking></ManageBooking></AdminRoute>
       },
       {
-        path:'users',
-        element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
+        path: 'users',
+        element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
       },
     ]
   }
