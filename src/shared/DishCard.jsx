@@ -11,7 +11,8 @@ const DishCard = ({ item }) => {
   const axiosSecure = useAxiosSecure();
   const [, refetch] = useCart();
   // send the cart item in DB
-  const handleAddToCart = () => {
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
     const cartDoc = {
       menuId: _id,
       email: user.email,
@@ -58,19 +59,26 @@ const DishCard = ({ item }) => {
       });
     }
   };
+
   return (
-    <div className="">
-      <div className="bg-base-100 shadow-sm">
-        <div className="">
-          <img src={image} alt={name} className="w-full" />
+    <div className="cursor-pointer group transition-all duration-300 hover:-translate-y-1">
+      <div className="bg-base-100 shadow-sm rounded-xl overflow-hidden border border-slate-100">
+        <div className="w-full h-56 overflow-hidden">
+          <img
+            src={image}
+            alt={name}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
         </div>
-        <div className="card-body items-center text-center">
-          <h2 className="card-title">{name}</h2>
-          <p className="text-gray-500">{recipe.substring(0, 80)}...</p>
-          <div className="card-actions">
+        <div className="card-body items-center text-center p-5">
+          <h2 className="card-title text-slate-800 group-hover:text-[#BB8506] transition-colors">
+            {name}
+          </h2>
+          <p className="text-gray-500 text-sm">{recipe?.substring(0, 40)}...</p>
+          <div className="card-actions mt-4">
             <button
-              onClick={handleAddToCart}
-              className="btn text-[#BB8506] hover:text-[#ebb537] hover:border-none bg-[#E8E8E8] border border-b-[#BB8506] hover:bg-[#1F2937]"
+              onClick={handleAddToCart} // 👈 ফিক্সড হ্যান্ডলার
+              className="btn text-[#BB8506] hover:text-[#ebb537] hover:border-none bg-[#E8E8E8] border border-b-4 border-b-[#BB8506] hover:bg-[#1F2937] transition-all duration-200"
             >
               Add to cart
             </button>

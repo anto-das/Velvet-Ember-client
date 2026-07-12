@@ -6,62 +6,126 @@ import { BsCart4 } from "react-icons/bs";
 import toast from "react-hot-toast";
 import useCart from "../hooks/useCart";
 import Profile from "../components/Profile";
-import logo from '../assets/icon/logo.png'
-import './navbar.css'
+import logo from "../assets/icon/logo.png";
+import "./navbar.css";
 import useAdmin from "../hooks/useAdmin";
 // import useAdmin from "../hooks/useAdmin";
 const Navbar = () => {
-  const {logout,user} = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
   const [isAdmin] = useAdmin();
-  const [cart] =useCart();
-  const handleSignOut = () =>{
-    logout()
-    .then(() =>{
-      toast.success('Sign Out Sucessfull')
-    })
-  }
-  const navOptions = <>
-     <ul className="menu items-center menu-vertical lg:menu-horizontal md:menu-horizontal px-1 w-full gap-3">
-      <li  className="text-md font-bold text-white uppercase" ><NavLink to={'/'}>home</NavLink></li>
-      <li ><NavLink to={isAdmin ?'/dashboard/admin-home':'/dashboard/my-bookings'} className="text-md font-bold text-white  uppercase">dashboard</NavLink></li>
-     <li > <NavLink to={'/our-menu'} className="text-md font-bold text-white  uppercase">our menu</NavLink></li>
-     <li > <NavLink to={'/our-shop/salad'} className="text-md font-bold text-white  uppercase">our shop</NavLink></li>
-     <Link to={isAdmin ?'/dashboard/admin-home':'/dashboard/my-bookings'}><button className="btn btn-circle bg-green-400 shadow-none border-none font-bold relative"> <span className="bg-white rounded-full absolute right-1 w-5 text-gray-700 -top-3">{cart.length} </span> <BsCart4 className="text-white text-xl font-bold"/></button></Link>
-     {/* user profile */}
-    {
-      user? <></> :<> <li > <NavLink to={'sign-in'} className="text-md font-bold text-white  uppercase">sign in</NavLink></li></>
-    }
-    </ul>
-  </>
-  return (
-   <div className="navbar flex justify-between items-center bg-black/20 shadow-sm">
-  <div className="inline">
-   <Link to={'/'}>
-    <div className="flex gap-1 items-center justify-center">
-      <img src={logo} className="w-8 mb-3" alt="" />
-      <p className=" capitalize shadow-none border-none text-lg font-bold text-white">velvet <span className='text-amber-500'> ember</span> 
-    </p>
-    </div>
-   </Link>
-  </div>
-  <div className="flex items-center">
-        <div className="hidden lg:block md:block">
-          {navOptions}
-        </div>
-   <div className="dropdown dropdown-end">
-     <div className="mx-2 text-xl text-white font-bold btn btn-ghost btn-circle hover:text-black hover:shadow-none hover:border-none lg:hidden md:hidden" role="button" tabIndex={0}>
-        < AiOutlineMenuFold/>
-        </div>
-        <div className="menu bg-gray-600 menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow" tabIndex={0}>
-          {navOptions}
-        </div>
-   </div>
-   {/* user profile */}
-  {
-    user && <Profile handleSignOut={handleSignOut}></Profile> }
-  </div>
-</div>
-  )
-}
+  const [cart] = useCart();
+  const handleSignOut = () => {
+    logout().then(() => {
+      toast.success("Sign Out Sucessfull");
+    });
+  };
+  const navOptions = (
+    <>
+      <ul className="menu items-center menu-vertical lg:menu-horizontal md:menu-horizontal px-1 w-full gap-3">
+        <li className="text-md font-bold text-white uppercase">
+          <NavLink to={"/"}>home</NavLink>
+        </li>
+        <li>
+          {" "}
+          {user && (
+            <NavLink
+              to={isAdmin ? "/dashboard/admin-home" : "/dashboard/my-bookings"}
+              className="text-md font-bold text-white  uppercase"
+            >
+              dashboard
+            </NavLink>
+          )}{" "}
+        </li>
 
-export default Navbar
+        <li>
+          {" "}
+          <NavLink
+            to={"/our-menu"}
+            className="text-md font-bold text-white  uppercase"
+          >
+            our menu
+          </NavLink>
+        </li>
+
+        <li>
+          {" "}
+          <NavLink
+            to={"/our-shop/salad"}
+            className="text-md font-bold text-white  uppercase"
+          >
+            our shop
+          </NavLink>
+        </li>
+
+        {/* user profile */}
+        {user ? (
+          <></>
+        ) : (
+          <>
+            {" "}
+            <li>
+              {" "}
+              <NavLink
+                to={"sign-in"}
+                className="text-md font-bold text-white  uppercase"
+              >
+                sign in
+              </NavLink>
+            </li>
+          </>
+        )}
+        <Link to={isAdmin ? "/dashboard/admin-home" : "/dashboard/my-bookings"}>
+          <button className="btn btn-circle bg-green-400 shadow-none border-none font-bold relative">
+            {" "}
+            <span className="bg-white rounded-full absolute right-1 w-5 text-gray-700 -top-3">
+              {cart.length}{" "}
+            </span>{" "}
+            <BsCart4 className="text-white text-xl font-bold" />
+          </button>
+        </Link>
+      </ul>
+    </>
+  );
+  return (
+    <div className="navbar flex justify-between items-center bg-[#0f0303] shadow-sm">
+      <div className="inline">
+        <Link to={"/"}>
+          <div className="flex gap-1 items-center justify-center">
+            <img src={logo} className="w-8 mb-3" alt="" />
+            <p className=" capitalize shadow-none border-none text-lg font-bold text-white">
+              <span className="italic py-0 rounded-2xl bg-amber-500 font-extrabold tracking-widest text-white uppercase ">
+              Velvet
+            </span>
+
+            <span className="ml-1 text-amber-500 font-extrabold tracking-widest  uppercase">
+              Ember
+            </span>
+            </p>
+          </div>
+        </Link>
+      </div>
+      <div className="flex items-center">
+        <div className="hidden lg:block md:block">{navOptions}</div>
+        <div className="dropdown dropdown-end">
+          <div
+            className="mx-2 text-xl text-white font-bold btn btn-ghost btn-circle hover:text-black hover:shadow-none hover:border-none lg:hidden md:hidden"
+            role="button"
+            tabIndex={0}
+          >
+            <AiOutlineMenuFold />
+          </div>
+          <div
+            className="menu bg-gray-600 menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow"
+            tabIndex={0}
+          >
+            {navOptions}
+          </div>
+        </div>
+        {/* user profile */}
+        {user && <Profile handleSignOut={handleSignOut}></Profile>}
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;

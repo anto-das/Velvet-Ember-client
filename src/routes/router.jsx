@@ -1,29 +1,27 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Main from "../layouts/Main";
+import Home from "../pages/Home";
+import OurMenu from "../pages/OurMenu";
+import OurShop from "../pages/OurShop";
+import SignIn from "../pages/SignIn";
+import SignUp from "../pages/SignUp";
+import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../layouts/Dashboard";
+import MyBookings from "../DashboardComponents/MyBookings";
+import AllUsers from "../DashboardComponents/AllUsers";
+import AddItem from "../DashboardComponents/AddItem";
+import AdminRoute from "./AdminRoute";
+import ManageItem from "../DashboardComponents/ManageItem";
+import UpdateItem from "../DashboardComponents/UpdateItem";
+import Payment from "../DashboardComponents/Payment";
+import PaymentHistory from "../DashboardComponents/PaymentHistory";
+import AdminHome from "../DashboardComponents/AdminHome";
+import ManageBooking from "../DashboardComponents/ManageBooking";
+import UserHome from "../DashboardComponents/UserHome";
+import AddReview from "../DashboardComponents/AddReview";
+import ErrorElement from "../components/ErrorElement/ErrorElement";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Main from '../layouts/Main';
-import Home from '../pages/Home';
-import OurMenu from '../pages/OurMenu';
-import OurShop from '../pages/OurShop';
-import SignIn from '../pages/SignIn';
-import SignUp from '../pages/SignUp';
-import PrivateRoute from './PrivateRoute';
-import Dashboard from '../layouts/Dashboard';
-import MyBookings from '../DashboardComponents/MyBookings';
-import AllUsers from '../DashboardComponents/AllUsers';
-import AddItem from '../DashboardComponents/AddItem';
-import AdminRoute from './AdminRoute';
-import ManageItem from '../DashboardComponents/ManageItem';
-import UpdateItem from '../DashboardComponents/UpdateItem';
-import Payment from '../DashboardComponents/Payment';
-import PaymentHistory from '../DashboardComponents/PaymentHistory';
-import AdminHome from '../DashboardComponents/AdminHome';
-import ManageBooking from '../DashboardComponents/ManageBooking';
-import UserHome from '../DashboardComponents/UserHome';
-import AddReview from '../DashboardComponents/AddReview';
-import ErrorElement from '../components/ErrorElement/ErrorElement';
+import FoodItemDetails from "../components/CartDetail";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,81 +29,119 @@ const router = createBrowserRouter([
     errorElement: <ErrorElement></ErrorElement>,
     children: [
       {
-        path: '/',
-        element: <Home></Home>
+        path: "/",
+        element: <Home></Home>,
       },
       {
-        path: '/our-menu',
-        element: <OurMenu></OurMenu>
+        path: "/dish-detail/:id",
+        element: <FoodItemDetails />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:4000/cart/${params.id}`),
       },
       {
-        path: '/our-shop/:category',
-        element: <PrivateRoute><OurShop></OurShop></PrivateRoute>
+        path: "/our-menu",
+        element: <OurMenu></OurMenu>,
       },
       {
-        path: '/sign-up',
-        element: <SignUp></SignUp>
+        path: "/our-shop/:category",
+        element: (
+          <PrivateRoute>
+            <OurShop></OurShop>
+          </PrivateRoute>
+        ),
       },
       {
-        path: '/sign-in',
-        element: <SignIn></SignIn>
-      }
-    ]
+        path: "/sign-up",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "/sign-in",
+        element: <SignIn></SignIn>,
+      },
+    ],
   },
   {
-    path: '/dashboard',
-    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
-        path: '/dashboard/my-bookings',
-        element: <MyBookings></MyBookings>
+        path: "/dashboard/my-bookings",
+        element: <MyBookings></MyBookings>,
       },
       {
-        path: '/dashboard/user-home',
-        element: <UserHome></UserHome>
+        path: "/dashboard/user-home",
+        element: <UserHome></UserHome>,
       },
       {
-        path: '/dashboard/reservation',
-        element: <Payment></Payment>
+        path: "/dashboard/reservation",
+        element: <Payment></Payment>,
       },
       {
-        path: '/dashboard/payment-history',
-        element: <PaymentHistory></PaymentHistory>
+        path: "/dashboard/payment-history",
+        element: <PaymentHistory></PaymentHistory>,
       },
       {
-        path: '/dashboard/add-review',
-        element: <AddReview></AddReview>
+        path: "/dashboard/add-review",
+        element: <AddReview></AddReview>,
       },
 
       // admin routes
       {
         path: "admin-home",
-        element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
       },
       {
-        path: 'add-items',
-        element: <AdminRoute><AddItem></AddItem></AdminRoute>
+        path: "add-items",
+        element: (
+          <AdminRoute>
+            <AddItem></AddItem>
+          </AdminRoute>
+        ),
       },
       {
-        path: 'update-item/:id',
-        element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
-        loader: ({ params }) => fetch(`https://velvet-ember-server.vercel.app/menu/${params.id}`)
+        path: "update-item/:id",
+        element: (
+          <AdminRoute>
+            <UpdateItem></UpdateItem>
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:4000/menu/${params.id}`),
       },
       {
-        path: 'manage-items',
-        element: <AdminRoute><ManageItem></ManageItem></AdminRoute>
+        path: "manage-items",
+        element: (
+          <AdminRoute>
+            <ManageItem></ManageItem>
+          </AdminRoute>
+        ),
       },
       {
-        path: 'bookings',
-        element: <AdminRoute><ManageBooking></ManageBooking></AdminRoute>
+        path: "bookings",
+        element: (
+          <AdminRoute>
+            <ManageBooking></ManageBooking>
+          </AdminRoute>
+        ),
       },
       {
-        path: 'users',
-        element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+        path: "users",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
-    ]
-  }
+    ],
+  },
 ]);
 
-
-export default router
+export default router;

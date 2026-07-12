@@ -40,7 +40,7 @@ const SignUp = () => {
         })
       })
     })
-    .catch(err => toast.error(err.message))
+    .catch(err => console.log(err))
   }
     return (
      <div style={{backgroundImage:`url(${bgImg})`}} className="hero min-h-screen bg-cover bg-center inset-0">
