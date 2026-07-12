@@ -2,16 +2,72 @@ import React, { useState } from "react";
 import { BiChevronLeft, BiShoppingBag, BiHeart } from "react-icons/bi";
 import { FiPlus, FiMinus } from "react-icons/fi";
 import { useLoaderData } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import useCart from "../hooks/useCart";
 
 const FoodItemDetails = () => {
   // Your provided mock data object
   const item = useLoaderData();
+  const user = useAuth().user; // Assuming you have a useAuth hook to get the user
 
+  const axiosSecure = useAxiosSecure();
+  const [, refetch] = useCart();
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
 
   const incrementQty = () => setQuantity((prev) => prev + 1);
   const decrementQty = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
+  const handleAddToCart = (e) => {
+    const cartDoc = {
+      menuId: item._id,
+      email: user.email,
+      name: item.name,
+      image: item.image,
+      price: item.price,
+      category: item.category,
+      quantity,
+    };
+    if (user && user.email) {
+      axiosSecure
+        .post("/carts", cartDoc)
+        .then((res) => {
+          if (res.data.acknowledged) {
+            toast.success(`${name} added to your cart`);
+            refetch();
+          }
+        })
+        .catch((err) => toast.error(err.message));
+    } else {
+      toast((t) => {
+        return (
+          <div className="space-y-2">
+            <p className="text-lg">Sorry, you're not signed in!</p>
+            <p className="text-sm text-center">Do you want to sign in?</p>
+            <div className="flex justify-around items-center">
+              <button
+                onClick={() => {
+                  toast.dismiss(t.id);
+                  navigate("/sign-in");
+                }}
+                className="btn btn-xs bg-blue-400 text-white"
+              >
+                Yes
+              </button>
+              <button
+                onClick={() => toast.dismiss(t.id)}
+                className="btn btn-xs bg-red-500"
+              >
+                No
+              </button>
+            </div>
+          </div>
+        );
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-neutral-800 antialiased font-sans px-4 py-8 md:py-12">
@@ -129,7 +185,10 @@ const FoodItemDetails = () => {
                 </div>
 
                 {/* Main Action Button */}
-                <button className="flex-1 bg-[#D99904] hover:bg-[#c28803] active:scale-[0.99] text-white font-medium py-4 px-6 rounded-xl flex items-center justify-center gap-3 transition-all duration-200 shadow-md hover:shadow-lg shadow-[#D99904]/10">
+                <button
+                  onClick={handleAddToCart}
+                  className="flex-1 bg-[#D99904] hover:bg-[#c28803] active:scale-[0.99] text-white font-medium py-4 px-6 rounded-xl flex items-center justify-center gap-3 transition-all duration-200 shadow-md hover:shadow-lg shadow-[#D99904]/10"
+                >
                   <BiShoppingBag className="text-xl" />
                   <span>Add to Order</span>
                 </button>

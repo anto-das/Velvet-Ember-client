@@ -34,7 +34,7 @@ export const HowItWorksLight = () => {
           <span className="text-xs font-bold text-amber-600 uppercase tracking-[0.25em] block mb-2">
             Seamless Journey
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
             How{" "}
             <span className="italic py-0 rounded-2xl bg-amber-500 font-extrabold tracking-widest text-white uppercase ">
               Velvet

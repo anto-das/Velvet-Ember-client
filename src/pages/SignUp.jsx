@@ -29,7 +29,9 @@ const SignUp = () => {
       .then(() =>{
         const userInfo = {
           name:name,
-          email:email
+          email:email,
+          role:'user',
+          image:photo
         }
         axiosPublic.post('/users',userInfo)
         .then(res =>{
@@ -49,7 +51,7 @@ const SignUp = () => {
            <img src={signInImg} alt="" />
          </div>
          <div className="card w-full">
-             <h1 className='text-center text-2xl font-bold'>Sign In</h1>
+             <h1 className='text-center text-2xl font-bold'>Sign Up</h1>
            <div className="card-body"> 
              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 {/* name field */}
