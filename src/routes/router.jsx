@@ -22,6 +22,7 @@ import AddReview from "../DashboardComponents/AddReview";
 import ErrorElement from "../components/ErrorElement/ErrorElement";
 
 import FoodItemDetails from "../components/CartDetail";
+import Contact from "../pages/ContactPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "/sign-in",
         element: <SignIn></SignIn>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
       },
     ],
   },

@@ -1,12 +1,17 @@
-import signInImg from '../assets/others/authentication2.png';
-import bgImg from '../assets/others/authentication.png';
-import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
-import { useContext, useEffect, useState, useRef } from 'react';
-import { FaEye, FaEyeSlash, FaUserShield } from 'react-icons/fa';
-import { AuthContext } from '../providers/AuthContext';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import SocialLogin from '../components/SocialLogin';
+import signInImg from "../assets/others/authentication2.png";
+import bgImg from "../assets/others/authentication.png";
+import logo from "../assets/icon/logo.png";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
+import { useContext, useEffect, useState, useRef } from "react";
+import { FaEye, FaEyeSlash, FaUserShield } from "react-icons/fa";
+import { AuthContext } from "../providers/AuthContext";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import SocialLogin from "../components/SocialLogin";
 
 const SignIn = () => {
   const { signIn } = useContext(AuthContext);
@@ -38,17 +43,17 @@ const SignIn = () => {
     */
     signIn(email, password)
       .then(() => {
-        toast.success('Welcome back to Velvet Ember!');
-        navigate(location.state || '/');
+        toast.success("Welcome back to Velvet Ember!");
+        navigate(location.state || "/");
       })
-      .catch((err) => toast.error(err.message));
+      .catch((err) => console.log(err));
   };
 
   const handleCaptcha = (e) => {
     const value = e.target.value;
     if (validateCaptcha(value)) {
       setDisabled(false);
-      toast.success('Captcha verified successfully');
+      toast.success("Captcha verified successfully");
     } else {
       setDisabled(true);
     }
@@ -57,50 +62,67 @@ const SignIn = () => {
   // Feature: One-Click Autofill Demo Credentials for testing and presentation
   const handleDemoLogin = () => {
     if (emailInputRef.current && passwordInputRef.current) {
-      emailInputRef.current.value = 'demo.user@velvetember.com';
-      passwordInputRef.current.value = 'VelvetEmber2026';
-      
+      emailInputRef.current.value = "demo.user@velvetember.com";
+      passwordInputRef.current.value = "VelvetEmber2026!";
+
       // Programmatically bypass the captcha state restriction for development UX ease
       setDisabled(false);
-      
+
       if (captchaInputRef.current) {
-        captchaInputRef.current.value = 'DEMO69';
-        captchaInputRef.current.placeholder = 'Bypassed via Demo Mode';
+        captchaInputRef.current.value = "DEMO69";
+        captchaInputRef.current.placeholder = "Bypassed via Demo Mode";
       }
-      
-      toast.success('Demo credentials loaded! Click Sign In.');
+
+      toast.success("Demo credentials loaded! Click Sign In.");
     }
   };
 
   return (
-    <div 
-      style={{ backgroundImage: `url(${bgImg})` }} 
+    <div
+      style={{ backgroundImage: `url(${bgImg})` }}
       className="min-h-screen bg-cover bg-center flex items-center justify-center p-4 antialiased text-neutral-800"
     >
       {/* Premium Frosted Glass Layout Container */}
       <div className="w-full max-w-5xl bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl border border-white/20 overflow-hidden grid grid-cols-1 md:grid-cols-2 items-center">
-        
         {/* Left Branding Column (Hidden on small viewports) */}
         <div className="hidden md:flex flex-col items-center justify-center p-12 bg-gradient-to-br from-amber-50/50 to-orange-50/30 h-full border-r border-neutral-100">
-          <img 
-            src={signInImg} 
-            alt="Velvet Ember Fine Dining Authentication Visual" 
+          <img
+            src={signInImg}
+            alt="Velvet Ember Fine Dining Authentication Visual"
             className="w-full max-w-sm drop-shadow-xl animate-pulse [animation-duration:8s]"
           />
           <div className="text-center mt-6 space-y-2">
-            <h2 className="font-serif text-2xl font-bold text-neutral-800 tracking-wide">Velvet Ember</h2>
-            <p className="text-sm text-neutral-500 font-light max-w-xs">Experience culinary artistry and luxury at your fingertips.</p>
+            <Link to={"/"}>
+              <div className="flex gap-1 items-center justify-center">
+                <img src={logo} className="w-8 mb-3" alt="" />
+                <p className=" capitalize shadow-none border-none text-lg font-bold text-white">
+                  <span className="italic py-0 rounded-2xl bg-amber-500 font-extrabold tracking-widest text-white uppercase ">
+                    Velvet
+                  </span>
+
+                  <span className="ml-1 text-amber-500 font-extrabold tracking-widest  uppercase">
+                    Ember
+                  </span>
+                </p>
+              </div>
+            </Link>
+            <p className="text-sm text-neutral-500 font-light max-w-xs">
+              Experience culinary artistry and luxury at your fingertips.
+            </p>
           </div>
         </div>
 
         {/* Right Form Input Column */}
         <div className="p-8 lg:p-12 w-full">
           <div className="max-w-md mx-auto space-y-6">
-            
             {/* Header Identity */}
             <div className="space-y-1 text-center md:text-left">
-              <h1 className="text-3xl font-serif font-bold text-neutral-900 tracking-tight">Sign In</h1>
-              <p className="text-sm text-neutral-500">Welcome back! Please enter your details below.</p>
+              <h1 className="text-3xl font-serif font-bold text-neutral-900 tracking-tight">
+                Sign In
+              </h1>
+              <p className="text-sm text-neutral-500">
+                Welcome back! Please enter your details below.
+              </p>
             </div>
 
             {/* Quick Demo Login Action Badge */}
@@ -115,31 +137,34 @@ const SignIn = () => {
 
             {/* Main Interactive Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
-              
               {/* Email Element */}
               <div className="space-y-1.5">
-                <label className="text-xs uppercase tracking-wider font-semibold text-neutral-500">Email Address</label>
-                <input 
+                <label className="text-xs uppercase tracking-wider font-semibold text-neutral-500">
+                  Email Address
+                </label>
+                <input
                   ref={emailInputRef}
-                  type="email" 
-                  name="email" 
+                  type="email"
+                  name="email"
                   required
-                  className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-sm focus:outline-none focus:border-[#d1a054] focus:bg-white transition-all shadow-inner" 
-                  placeholder="name@example.com" 
+                  className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-sm focus:outline-none focus:border-[#d1a054] focus:bg-white transition-all shadow-inner"
+                  placeholder="name@example.com"
                 />
               </div>
 
               {/* Password Element with absolute micro-interactions */}
               <div className="space-y-1.5 relative">
-                <label className="text-xs uppercase tracking-wider font-semibold text-neutral-500">Password</label>
+                <label className="text-xs uppercase tracking-wider font-semibold text-neutral-500">
+                  Password
+                </label>
                 <div className="relative">
-                  <input 
+                  <input
                     ref={passwordInputRef}
-                    type={isShowPassword ? "text" : "password"} 
-                    name="password" 
+                    type={isShowPassword ? "text" : "password"}
+                    name="password"
                     required
-                    className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-sm focus:outline-none focus:border-[#d1a054] focus:bg-white transition-all shadow-inner pr-12" 
-                    placeholder="••••••••" 
+                    className="w-full px-4 py-3 bg-neutral-50 border border-neutral-200 rounded-xl text-sm focus:outline-none focus:border-[#d1a054] focus:bg-white transition-all shadow-inner pr-12"
+                    placeholder="••••••••"
                   />
                   <button
                     type="button"
@@ -156,30 +181,33 @@ const SignIn = () => {
                 <div className="overflow-hidden rounded-lg bg-white border border-neutral-200 p-1 shadow-sm">
                   <LoadCanvasTemplate />
                 </div>
-                <input 
+                <input
                   ref={captchaInputRef}
-                  type="text" 
-                  onBlur={handleCaptcha} 
-                  name="captcha" 
-                  className="w-full px-4 py-2.5 bg-white border border-neutral-200 rounded-xl text-sm focus:outline-none focus:border-[#d1a054] transition-all shadow-inner text-center tracking-widest font-mono" 
-                  placeholder="Type code above & click away" 
+                  type="text"
+                  onBlur={handleCaptcha}
+                  name="captcha"
+                  className="w-full px-4 py-2.5 bg-white border border-neutral-200 rounded-xl text-sm focus:outline-none focus:border-[#d1a054] transition-all shadow-inner text-center tracking-widest font-mono"
+                  placeholder="Type code above & click away"
                 />
               </div>
 
               {/* Core Submit Button */}
               <div className="pt-2">
-                <input 
-                  disabled={disabled} 
-                  type="submit"  
-                  value="Sign In to Account" 
+                <input
+                  disabled={disabled}
+                  type="submit"
+                  value="Sign In to Account"
                   className="w-full bg-[#d1a054] hover:bg-[#b88c45] disabled:bg-neutral-200 disabled:text-neutral-400 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-xl transition-all duration-200 cursor-pointer shadow-md hover:shadow-lg shadow-amber-700/10 active:scale-[0.99]"
                 />
               </div>
 
               {/* Navigation Link to Sign Up */}
               <p className="text-center text-sm text-neutral-500 pt-2">
-                New to Velvet Ember?{' '}
-                <Link to="/sign-up" className="text-[#cc7d05] font-semibold hover:underline underline-offset-4 transition-all">
+                New to Velvet Ember?{" "}
+                <Link
+                  to="/sign-up"
+                  className="text-[#cc7d05] font-semibold hover:underline underline-offset-4 transition-all"
+                >
                   Create a luxury account
                 </Link>
               </p>
@@ -191,14 +219,14 @@ const SignIn = () => {
                 <div className="absolute inset-0 flex items-center">
                   <div className="w-full border-t border-neutral-200"></div>
                 </div>
-                <span className="relative px-3 text-xs uppercase tracking-widest bg-white text-neutral-400 font-medium">Or connect with</span>
+                <span className="relative px-3 text-xs uppercase tracking-widest bg-white text-neutral-400 font-medium">
+                  Or connect with
+                </span>
               </div>
               <SocialLogin />
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
   );

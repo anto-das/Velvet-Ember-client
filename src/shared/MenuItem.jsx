@@ -1,58 +1,66 @@
 import { useNavigate } from "react-router-dom";
+import { FaCoins } from "react-icons/fa";
 
 const MenuItem = ({ item }) => {
-  const { _id, name, price, image, recipe,category } = item;
+  const { _id, name, price, image, recipe, category } = item;
   const navigate = useNavigate();
+
   const handleCardClick = (id) => {
-    console.log("Card clicked with id:",id);
+    console.log("Card clicked with id:", id);
     navigate(`/dish-detail/${id}`);
   };
+
   return (
     <div
       onClick={() => handleCardClick(_id)}
-      className="group relative flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-5 transition-all duration-300 ease-out border-b border-dashed border-neutral-200 hover:border-solid hover:border-[#D99904]/40 hover:bg-neutral-50/60 rounded-xl cursor-pointer"
+      className="group flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 transition-all duration-300 border-b border-slate-100 hover:bg-slate-50/50 rounded-2xl cursor-pointer"
     >
-      {/* Left Section: Image and Text Info */}
-      <div className="flex flex-col sm:flex-row items-start gap-5 w-full">
-        {/* Fancy Image Wrapper with custom border-radius & subtle overlay */}
-        <div className="relative overflow-hidden w-24 h-24 sm:w-28 sm:h-28 shrink-0 bg-neutral-100 rounded-tr-[2.5rem] rounded-bl-[2.5rem] rounded-tl-xl rounded-br-xl shadow-md group-hover:shadow-lg transition-shadow duration-300">
+      {/* Left Area: Food Showcase Photo & Descriptions */}
+      <div className="flex flex-col sm:flex-row items-start gap-4 w-full">
+        
+        {/* Minimal Modern Image Box Frame */}
+        <div className="relative overflow-hidden w-20 h-20 sm:w-24 sm:h-24 shrink-0 bg-slate-50 rounded-xl border border-slate-100 shadow-sm transition-transform duration-500 group-hover:scale-[1.02]">
           <img
             src={image}
             alt={name}
-            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            loading="lazy"
           />
-          <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-slate-950/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
 
-        {/* Text Contents */}
-        <div className="space-y-1.5 flex-1">
-          <div className="flex items-baseline gap-2">
-            <h3 className="text-lg font-serif font-semibold text-neutral-800 tracking-wide group-hover:text-[#D99904] transition-colors duration-200">
+        {/* Text Context & Descriptive Meta */}
+        <div className="space-y-1 flex-1">
+          <div className="flex items-center gap-2">
+            <h3 className="text-base font-black text-slate-800 tracking-tight transition-colors duration-300 group-hover:text-amber-600">
               {name}
             </h3>
-            {/* Elegant luxury dotted separator line */}
-            <div className="hidden sm:block flex-1 border-b border-dotted border-neutral-300 relative top-[-4px] group-hover:border-[#D99904]/30 transition-colors" />
+            
+            {/* Simple Minimal Dotted Separator Track Line */}
+            <div className="hidden sm:block flex-1 border-b border-dashed border-slate-200 group-hover:border-amber-500/20 transition-colors" />
           </div>
           
-          <p className="text-sm text-neutral-500 font-light leading-relaxed max-w-xl line-clamp-2">
+          <p className="text-xs text-slate-400 font-medium leading-relaxed max-w-xl line-clamp-2">
             {recipe}
           </p>
           
-          {/* Optional Category Tag */}
+          {/* Minimalist Micro Category Capsule Badge */}
           {category && (
-            <span className="inline-block text-[10px] uppercase tracking-widest font-medium bg-neutral-100 text-neutral-600 px-2.5 py-0.5 rounded-full group-hover:bg-[#D99904]/10 group-hover:text-[#D99904] transition-colors">
+            <span className="inline-block text-[9px] uppercase tracking-widest font-black bg-slate-100 text-slate-500 px-2 py-0.5 rounded transition-colors group-hover:bg-amber-500/10 group-hover:text-amber-600">
               {category}
             </span>
           )}
         </div>
       </div>
 
-      {/* Right Section: Price and Floating Badge */}
-      <div className="sm:self-center shrink-0 pl-1 sm:pl-4">
-        <span className="text-xl font-mono font-medium text-[#D99904] bg-[#D99904]/5 px-3 py-1.5 rounded-lg border border-[#D99904]/10 group-hover:bg-[#D99904] group-hover:text-white transition-all duration-300 shadow-sm">
-          ${price}
+      {/* Right Area: Monetary Valuation Label */}
+      <div className="sm:self-center shrink-0 pl-0 sm:pl-4 self-end sm:self-auto">
+        <span className="inline-flex items-center gap-1 text-sm font-black text-slate-900 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200 transition-all duration-300 group-hover:bg-slate-900 group-hover:border-slate-900 group-hover:text-white shadow-sm">
+          <FaCoins className="text-[10px] text-slate-400 group-hover:text-amber-400 transition-colors" />
+          <span>${Number(price || 0).toFixed(2)}</span>
         </span>
       </div>
+      
     </div>
   );
 };
