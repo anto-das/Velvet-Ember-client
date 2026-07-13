@@ -193,7 +193,7 @@ const Navbar = () => {
                 <li>
                   <button
                     onClick={() => {
-                      navigate("/dashboard/user-home");
+                      navigate("/dashboard/view-profile");
                       closeMenus();
                     }}
                     className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-300 hover:bg-white/[0.04] hover:text-amber-400 text-left transition-colors"
@@ -207,7 +207,7 @@ const Navbar = () => {
                 <li>
                   <button
                     onClick={() => {
-                      navigate("/dashboard/add-review");
+                      navigate("/dashboard/update-profile");
                       closeMenus();
                     }}
                     className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-300 hover:bg-white/[0.04] hover:text-amber-400 text-left transition-colors"

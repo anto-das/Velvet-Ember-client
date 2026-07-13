@@ -79,7 +79,7 @@ const DishCard = ({ item }) => {
   };
 
   return (
-    <div className="group relative bg-white border border-slate-100 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.04)] hover:border-amber-500/20 transition-all duration-300 transform hover:-translate-y-1.5 overflow-hidden flex flex-col h-full z-0">
+    <div className="w-4/5 mx-auto group relative bg-white border border-slate-100 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.01)] hover:shadow-[0_15px_35px_rgba(0,0,0,0.04)] hover:border-amber-500/20 transition-all duration-300 transform hover:-translate-y-1.5 overflow-hidden flex flex-col h-full z-0">
       
       {/* Top Floating Absolute Category Badge */}
       <span className="absolute top-3 left-3 z-10 text-[9px] font-black tracking-widest text-amber-700 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-lg uppercase shadow-sm border border-slate-100">

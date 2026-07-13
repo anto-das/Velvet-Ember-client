@@ -23,6 +23,8 @@ import ErrorElement from "../components/ErrorElement/ErrorElement";
 
 import FoodItemDetails from "../components/CartDetail";
 import Contact from "../pages/ContactPage";
+import ViewProfile from "../DashboardComponents/ViewProfile";
+import UpdateProfile from "../DashboardComponents/updateProfile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -92,6 +94,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/add-review",
         element: <AddReview></AddReview>,
+      },
+      {
+        path: "/dashboard/view-profile",
+        element: <ViewProfile></ViewProfile>,
+      },
+      {
+        path: "/dashboard/update-profile",
+        element: <UpdateProfile></UpdateProfile>,
       },
 
       // admin routes

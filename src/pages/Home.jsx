@@ -5,6 +5,7 @@ import ChefRecomends from "../components/ChefRecomends";
 import Featured from "../components/Featured";
 import PopularMenu from "../components/PopularMenu";
 import Testimonials from "../components/Testimonials";
+import OfferedSection from "../components/Offered";
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
       <div className="w-11/14 mx-auto my-10">
         <Category></Category>
         <PopularMenu></PopularMenu>
+        <OfferedSection></OfferedSection>
         <ChefRecomends></ChefRecomends>
         <Featured></Featured>
         <Testimonials></Testimonials>
