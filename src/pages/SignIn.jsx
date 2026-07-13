@@ -68,7 +68,7 @@ const SignIn = () => {
       emailInputRef.current.value = "demo.user@velvetember.com";
       passwordInputRef.current.value = "VelvetEmber2026!";
     } else {
-      emailInputRef.current.value = "demo.admin@velvetember.com";
+      emailInputRef.current.value = "admin@velvetember.com";
       passwordInputRef.current.value = "Admin@2026!";
     }
 

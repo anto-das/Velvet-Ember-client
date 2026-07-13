@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         path: "/dish-detail/:id",
         element: <FoodItemDetails />,
         loader: ({ params }) =>
-          fetch(`http://localhost:4000/menu/${params.id}`),
+          fetch(`https://velvet-ember-server.vercel.app/menu/${params.id}`),
       },
       {
         path: "/our-menu",
@@ -129,7 +129,7 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:4000/menu/${params.id}`),
+          fetch(`https://velvet-ember-server.vercel.app/menu/${params.id}`),
       },
       {
         path: "manage-items",
