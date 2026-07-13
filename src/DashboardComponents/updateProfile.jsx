@@ -13,7 +13,7 @@ import useAuth from "../hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const hosting_image_key = import.meta.env.VITE_HOSTING_IMAGE_KEY;
-const image_hosting_api = `https://imgbb.com{hosting_image_key}`;
+const image_hosting_api = `https://imgbb.com${hosting_image_key}`;
 
 const UpdateProfile = () => {
   const { user, updateUser } = useAuth();

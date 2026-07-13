@@ -1,4 +1,3 @@
-import { useState } from "react";
 import TitleBox from "../components/TitleBox";
 import useAuth from "../hooks/useAuth";
 import useCart from "../hooks/useCart";

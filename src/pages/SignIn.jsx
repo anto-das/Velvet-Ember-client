@@ -17,6 +17,7 @@ const SignIn = () => {
   const { signIn } = useContext(AuthContext);
   const [disabled, setDisabled] = useState(true);
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const [showDemoModal, setShowDemoModal] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -60,21 +61,29 @@ const SignIn = () => {
   };
 
   // Feature: One-Click Autofill Demo Credentials for testing and presentation
-  const handleDemoLogin = () => {
-    if (emailInputRef.current && passwordInputRef.current) {
+  const fillDemoCredentials = (role) => {
+    if (!emailInputRef.current || !passwordInputRef.current) return;
+
+    if (role === "user") {
       emailInputRef.current.value = "demo.user@velvetember.com";
       passwordInputRef.current.value = "VelvetEmber2026!";
-
-      // Programmatically bypass the captcha state restriction for development UX ease
-      setDisabled(false);
-
-      if (captchaInputRef.current) {
-        captchaInputRef.current.value = "DEMO69";
-        captchaInputRef.current.placeholder = "Bypassed via Demo Mode";
-      }
-
-      toast.success("Demo credentials loaded! Click Sign In.");
+    } else {
+      emailInputRef.current.value = "demo.admin@velvetember.com";
+      passwordInputRef.current.value = "Admin@2026!";
     }
+
+    setDisabled(false);
+
+    if (captchaInputRef.current) {
+      captchaInputRef.current.value = "DEMO69";
+      captchaInputRef.current.placeholder = "Bypassed via Demo Mode";
+    }
+
+    setShowDemoModal(false);
+
+    toast.success(
+      `${role === "user" ? "User" : "Admin"} demo loaded successfully!`,
+    );
   };
 
   return (
@@ -128,11 +137,11 @@ const SignIn = () => {
             {/* Quick Demo Login Action Badge */}
             <button
               type="button"
-              onClick={handleDemoLogin}
+              onClick={() => setShowDemoModal(true)}
               className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-amber-50 hover:bg-amber-100/80 border border-amber-200/60 rounded-xl text-xs font-semibold text-[#cc7d05] transition-all duration-200 active:scale-[0.99] group shadow-sm"
             >
               <FaUserShield className="text-sm group-hover:scale-110 transition-transform" />
-              <span>Click for Instant Demo Auto-Fill</span>
+              <span>Click for Instant Demo</span>
             </button>
 
             {/* Main Interactive Form */}
@@ -225,6 +234,105 @@ const SignIn = () => {
               </div>
               <SocialLogin />
             </div>
+            {showDemoModal && (
+              <div
+                className="fixed inset-0 z-[999] flex items-center justify-center bg-black/40 backdrop-blur-sm animate-in fade-in duration-200"
+                onClick={() => setShowDemoModal(false)}
+              >
+                <div
+                  onClick={(e) => e.stopPropagation()}
+                  className="relative w-[92%] max-w-md overflow-hidden rounded-3xl border border-white/30 bg-white shadow-2xl animate-in zoom-in-95 duration-200"
+                >
+                  {/* Top Gradient */}
+                  <div className="h-2 bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500"></div>
+
+                  <div className="p-7">
+                    {/* Header */}
+                    <div className="text-center space-y-2">
+                      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-amber-100">
+                        <FaUserShield className="text-3xl text-amber-600" />
+                      </div>
+
+                      <h2 className="text-2xl font-bold text-neutral-800">
+                        Select Demo Account
+                      </h2>
+
+                      <p className="text-sm text-neutral-500">
+                        Choose how you'd like to explore Velvet Ember.
+                      </p>
+                    </div>
+
+                    {/* Options */}
+                    <div className="mt-7 space-y-4">
+                      {/* USER */}
+
+                      <button
+                        onClick={() => fillDemoCredentials("user")}
+                        className="group w-full rounded-2xl border border-neutral-200 p-5 transition-all duration-300 hover:border-amber-400 hover:bg-amber-50 hover:shadow-lg"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-amber-100 text-2xl">
+                            👤
+                          </div>
+
+                          <div className="flex-1 text-left">
+                            <h3 className="font-semibold text-lg text-neutral-800">
+                              Customer Demo
+                            </h3>
+
+                            <p className="text-sm text-neutral-500">
+                              Browse food, place orders and enjoy the customer
+                              experience.
+                            </p>
+                          </div>
+
+                          <span className="text-xl transition-transform group-hover:translate-x-1">
+                            →
+                          </span>
+                        </div>
+                      </button>
+
+                      {/* ADMIN */}
+
+                      <button
+                        onClick={() => fillDemoCredentials("admin")}
+                        className="group w-full rounded-2xl border border-neutral-200 p-5 transition-all duration-300 hover:border-amber-400 hover:bg-amber-50 hover:shadow-lg"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-amber-100 text-2xl">
+                            🛡️
+                          </div>
+
+                          <div className="flex-1 text-left">
+                            <h3 className="font-semibold text-lg text-neutral-800">
+                              Admin Demo
+                            </h3>
+
+                            <p className="text-sm text-neutral-500">
+                              Access dashboard, manage menu, orders and
+                              restaurant analytics.
+                            </p>
+                          </div>
+
+                          <span className="text-xl transition-transform group-hover:translate-x-1">
+                            →
+                          </span>
+                        </div>
+                      </button>
+                    </div>
+
+                    {/* Footer */}
+
+                    <button
+                      onClick={() => setShowDemoModal(false)}
+                      className="mt-6 w-full rounded-xl border border-neutral-200 py-3 text-sm font-medium text-neutral-600 transition hover:bg-neutral-100"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -6,42 +6,15 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import useMenu from "../hooks/useMenu";
 
 // Structured data mapping matching your schema
-const offeredItemsMock = [
-  {
-    _id: "642c155b2c4774f05c36ee80",
-    name: "Roast Duck Breast",
-    recipe:
-      "Roasted duck breast (served pink) with gratin potato and a griottine cherry reduction syrup infusion.",
-    image: "https://unsplash.com",
-    category: "offered",
-    price: 14.5,
-  },
-  {
-    _id: "642c155b2c4774f05c36ee81",
-    name: "Smoked Obsidian Salmon",
-    recipe:
-      "Pan-seared Atlantic salmon coated in citrus-infused active coal dust with grilled asparagus tips.",
-    image: "https://unsplash.com",
-    category: "offered",
-    price: 18.0,
-  },
-  {
-    _id: "642c155b2c4774f05c36ee82",
-    name: "Velvet Chocolate Hearth Cake",
-    recipe:
-      "Warm molten chocolate core dusted with volcanic gold flakes and pure Madagascan vanilla dust shell.",
-    image: "https://unsplash.com",
-    category: "offered",
-    price: 9.5,
-  },
-];
 
 const OfferedSection = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [, refetch] = useCart();
   const [menuItems] = useMenu(); // Assuming useCart returns the menu items as well
-  const filteredMenuItems = menuItems.filter((item) => item.category === "offered");
+  const filteredMenuItems = menuItems.filter(
+    (item) => item.category === "offered",
+  );
 
   const handleAddToCart = (item, e) => {
     e.stopPropagation();
